@@ -1,452 +1,323 @@
 <html>
 <head>
-    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
     <style>
-    .textTop {
-        font: 1.0em sans-serif;
-        color: black;
-        fill: #bbb;
-    }
-    .axis--grid .domain {
-        fill: #6666;
-        stroke: none;
-    }
+    *{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
-    .axis--x .domain,
-    .axis--grid .tick line {
-        stroke: #fff;
-    }
+h1{
+  font-size: 2.5rem;
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: #444;
+  text-align: center;
+  margin: 2rem 0;
+}
 
-    .axis--grid .tick--minor line {
-        stroke-opacity: .5;
-    }
-    .brush text {
-        fill:blue;
-        font-size: 0.75em;
-    }
-    #option {
-        position: absolute;
-        top: 500px;
-        right: 510px;
-    }
+.wrapper{
+  width: 90%;
+  margin: 0 auto;
+  max-width: 80rem;
+}
+
+.cols{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.col{
+  width: calc(25% - 2rem);
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.container{
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
+            perspective: 1000px;
+}
+
+.front,
+.back{
+  background-size: cover;
+    background-position: center;
+    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    text-align: center;
+    min-height: 280px;
+    height: auto;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.back{
+  background: #cedce7;
+  background: -webkit-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: -o-linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+  background: linear-gradient(45deg,  #cedce7 0%,#596a72 100%);
+}
+
+.front:after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: '';
+    display: block;
+    opacity: .6;
+    background-color: #000;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    border-radius: 10px;
+}
+.container:hover .front,
+.container:hover .back{
+    -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.inner{
+    -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+            transform: translateY(-50%) translateZ(60px) scale(0.94);
+    top: 50%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    outline: 1px solid transparent;
+    -webkit-perspective: inherit;
+            perspective: inherit;
+    z-index: 2;
+}
+
+.container .back{
+    -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.container .front{
+    -webkit-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.container:hover .back{
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.container:hover .front{
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.front .inner p{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.front .inner p:after{
+  content: '';
+  width: 4rem;
+  height: 2px;
+  position: absolute;
+  background: #C6D4DF;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -.75rem;
+}
+
+.front .inner span{
+  color: rgba(255,255,255,0.7);
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+@media screen and (max-width: 64rem){
+  .col{
+    width: calc(33.333333% - 2rem);
+  }
+}
+
+@media screen and (max-width: 48rem){
+  .col{
+    width: calc(50% - 2rem);
+  }
+}
+
+@media screen and (max-width: 32rem){
+  .col{
+    width: 100%;
+    margin: 0 0 2rem 0;
+  }
+}
     </style>
 </head>
 <body>
-    <svg width="960" height="500"></svg>
-    <script>
-
-    var MONTH_LABEL = [
-    '',
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-    ];
-
-    var counter = -1;
-    d3.csv("dataWiki.csv", function(error, data) {
-        if (error) throw error;
-        data.forEach(function(d) {
-            d.Visit = +d.Visit;
-            d.Month = +d.Month;
-            d.Day = +d.Day;
-            d.Year = +d.Year;
-        });
-
-        var nest2 = d3.nest()
-            .key(function(d){ return d.Year; }).sortKeys(d3.ascending)
-            .key(function(d){ return d.Month; })
-            .key(function(d){ return d.Day; })
-        .rollup(function(k){
-            return d3.sum(k, function(d) {return (d.Visit)});
-        })
-        .entries(data);
-
-        var selectedValue = null,
-        selectedMonth = null;
-
-    var svg = d3.select('svg');
-    var width = +svg.attr('width'),
-    height = +svg.attr('height'),
-    outermostRadius = Math.min(width, height) / 2 - 50,
-    blockLength = outermostRadius * 0.2,
-    blockMargin = outermostRadius * 0.05,
-    monthInnerRadius = outermostRadius - blockLength,
-    padAngle = 0.02,
-    cornerRadius = 6,
-    monthLabelSize = 14,
-    dayOuterRadius = monthInnerRadius - blockMargin,
-    dayInnerRadius = dayOuterRadius - blockLength;
-
-    var dataFiltered = nest2.filter(function (d){ return d.key == '2016'});
-    heatmap();
-
-    function heatmap(){
-
-        d3.select("body").append("div")
-        .attr("id","btnDiv")
-        .style('font-size','75%')
-        .style("width","300px")
-        .style("position","absolute")
-        .style("left",width - 130)
-        .style("top",height)
-
-        var btn = d3.select("#btnDiv").selectAll("button").data(['Update'])
-
-        btn = btn.enter().append("button").style("display","inline-block")
-
-        btn.each(function (d) {
-            this.innerText = d;
-        })
-
-        btn.on("click", updateData);
-
-        var datavals = [2016,2017,2018];
-        var slider = d3.sliderVertical()
-        .min(2016)
-        .max(2018)
-        .ticks(2)
-        .tickFormat(d3.format(''))
-        .height(400)
-        .marks(datavals)
-        .default(dataFiltered[0].key)
-        .on('onchange', val => {
-            svg.selectAll("*").remove();
-            dataFiltered = nest2.filter(function (d){ return d.key == val});
-            heatmap();
-        });
-
-        var group = svg.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + 60 + "," + 30 + ")");
-
-        group.call(slider);
-
-        var len = dataFiltered[0].values.length;
-
-        var x = d3.scaleTime()
-        .domain([new Date(dataFiltered[0].key,dataFiltered[0].values[0].key - 1, 1), new Date(dataFiltered[0].key, dataFiltered[0].values[len - 1].key , 0)])
-        .rangeRound([10, height - 20]);
-
-        svg.append("g")
-        .attr("class", "axis axis--grid")
-        .attr("transform", "translate(" + (width - 60) + "," + 0 + ")")
-        .call(d3.axisRight(x)
-            .ticks(d3.timeDay.every(1))
-            .tickSize(-100)
-            .tickFormat(function() { return null; }))
-        .selectAll(".tick")
-        .classed("tick--minor", function(d) { return d.getDay(); });
-
-        svg.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(" + (width - 60) + "," + 0 + ")")
-        .call(d3.axisRight(x)
-            .ticks(d3.timeMonth.every(1))
-            .tickPadding(0))
-            .attr("text-anchor", null)
-        .selectAll("text")
-        .attr("x", 6);
-
-        let brush = d3.brushY()
-        .extent([[width - 160, 10], [width - 60, height - 20]])
-        .on("brush", brushmove)
-        .on("end", brushended)
-
-        var gBrush = svg.append("g")
-        .attr("class", "brush")
-        .attr("fill", "#666")
-        .attr("fill-opacity", 0.8)
-        .attr("stroke", "#000")
-        .attr("stroke-width", 1.0)
-        .attr("cursor", "ew-resize")
-        .call(brush);
-
-        var bSelect1 = gBrush.append("text")
-                .text(function(d) { return d; })
-                .attr("fill", "blue")
-                .attr("id", "brush-label1")
-                .attr("text-anchor", "end")
-                .attr("x", width - 160)
-                .attr("dy", ".20em")
-                .style("letter-spacing", "1px");
-
-        var bSelect2 = gBrush.append("text")
-                .text(function(d) { return d; })
-                .attr("fill", "blue")
-                .attr("id", "brush-label2")
-                .attr("text-anchor", "end")
-                .attr("x", width - 160)
-                .attr("dy", ".8em")
-                .style("letter-spacing", "1px");
-
-        var month1 = null;
-        var month2 = null;
-        var day1 = null;
-        var day2 = null;
-
-        function brushmove(){
-            if (!d3.event.sourceEvent) return;
-            if (!d3.event.selection) return;
-            var d0 = d3.event.selection.map(x.invert),
-                d1 = d0.map(d3.timeDay.round);
-
-            if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0])
-            d1[1] = d3.timeDay.offset(d1[0]);
-            }
-
-            if (d3.event.selection[1] - d3.event.selection[0] < 40) {
-                d3.event.selection[1] = d3.event.selection[0] + 40;
-                brush.move(gBrush,[d3.event.selection[0],d3.event.selection[1]]);
-            }
-
-            month1 = d1[0].getMonth();
-            month2 = d1[1].getMonth();
-
-            d1[0] = d1[0].getDate();
-            d1[1] = d1[1].getDate();
-
-            month1 = MONTH_LABEL[month1 + 1];
-            month2 = MONTH_LABEL[month2 + 1]
-
-            d3.select(this).select("#brush-label1")
-                        .text([month1 + ' ' + d1[0]]);
-            d3.select(this).select("#brush-label2")
-                        .text([month2 + ' ' + d1[1]]);
-
-            d3.select(this).select("#brush-label1")
-                        .attr("y", d3.event.selection[0] - 5);
-            d3.select(this).select("#brush-label2")
-                        .attr("y", d3.event.selection[1] + 5);
-        }
-
-        function brushended() {
-            if (!d3.event.sourceEvent) return;
-            if (!d3.event.selection) {
-                d3.select(this).select("#brush-label1")
-                        .text([]);
-                d3.select(this).select("#brush-label2")
-                        .text([]);
-                return;
-            }
-            var d0 = d3.event.selection.map(x.invert),
-                d1 = d0.map(d3.timeDay.round);
-
-            if (d1[0] >= d1[1]) {
-            d1[0] = d3.timeDay.floor(d0[0]);
-            d1[1] = d3.timeDay.offset(d1[0]);
-            }
-
-            month1 = d1[0].getMonth();
-            month2 = d1[1].getMonth();
-
-            d1[0] = d1[0].getDate();
-            d1[1] = d1[1].getDate();
-
-            day1 = d1[0];
-            day2 = d1[1];
-        }
-
-        function updateData(){
-
-            // var selectedmonths = dataFiltered[0].values.filter(filterCriteria1);
-            // var selecteddays = s.filter(filterCriteria2);
-
-            // function filterCriteria1(d){
-            //     if(d.key>=month1 && d.key<=month2){
-            //         return d;
-            //     }
-            // }
-
-            // function filterCriteria2(d){
-            //     if(d.key>=day1 && d.key<=day2){
-            //         return d;
-            //     }
-            // }
-            // console.log(month1);
-            // console.log(month2);
-            // console.log(day1);
-            // console.log(day2);
-            // console.log(selecteddays);
-        }
-
-        var monthColor = d3.scaleOrdinal()
-        .domain(d3.range(12))
-        .range(["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f"]);
-
-        var heatColor = d3.scaleSequential(d3.interpolateYlOrRd).domain([1500000, 15000000]);
-
-        var monthArc = d3.arc()
-        .padAngle(padAngle)
-        .cornerRadius(cornerRadius)
-        .innerRadius(monthInnerRadius)
-        .outerRadius(outermostRadius);
-
-        var monthTheta = d3.scaleLinear()
-        .domain([0, dataFiltered[0].values.length])
-        .range([0, Math.PI * 2]);
-
-        var dayThetas = dataFiltered[0].values.map(function (d) {
-        var angles = getMonthAngle(+d.key);
-        var startRange = angles[0] + padAngle;
-        var endRange = angles[1] - padAngle;
-        return d3.scaleLinear()
-            .domain([0, d.values.length])
-            .range([startRange, endRange]);
-        });
-
-        var circle = svg.append('g').attr('class', 'circle')
-        .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
-
-        var monthGroup = circle.selectAll('.month-group').data(dataFiltered[0].values)
-        .enter().append('g')
-        .attr('class', function (d) {
-            return MONTH_LABEL[+d.key] + ' month-group';
-        });
-
-        var monthWrap = monthGroup.append('g')
-        .datum(function (d) {
-            return d;
-        })
-        .attr('class', 'month-wrap')
-        .on('mouseover', function (d) {
-            selectedMonth = d.key;
-            counter = -1;
-            updateCircle();
-        })
-        .on('mouseout', function () {
-            selectedMonth = null;
-            counter = -1;
-            updateCircle();
-        });
-
-        var monthPath = monthWrap.append('path')
-        .datum(function (d) {
-            return d;
-        })
-        .attr('class', 'month')
-        .attr('id', function (d) {
-            return 'path-' + d.key;
-        });
-
-        var textTop = monthWrap.append("text")
-        .attr("transform", function(d) { return "translate(" + monthArc.centroid(d) + ")"; })
-        .attr("class", "textTop")
-        .attr("dy", ".40em")
-        .text("")
-        .style("text-anchor", "middle");
-
-        var monthText = monthWrap.append('text')
-        .datum(function (d) {
-            return d;
-        })
-        .attr('class', 'month-label');
-
-        var monthTextPath = monthText.append('textPath')
-        .attr("class", "textpath");
-
-        var dayGroup = monthGroup.append('g')
-        .attr('class', 'day-group');
-
-        counter = -1;
-        updateCircle();
-
-        function updateCircle() {
-            monthPath
-            .attr('fill', function (d) {
-                return monthColor(d.key);
-            })
-            .attr('stroke', function() {
-                return 'red';
-            })
-            .attr('stroke-width', function(d) {
-                return selectedMonth === d.key ? 2 : 0;
-            })
-            .attr('d', function (d) {
-                var angles = getMonthAngle(+d.key);
-                return monthArc({
-                    startAngle: angles[0],
-                    endAngle: angles[1]
-                })
-            });
-            monthText
-            .attr('text-anchor', 'middle')
-            .attr('font-family', 'sans-serif')
-            .attr('font-size', monthLabelSize)
-            .attr('x', function (d) {
-                var angles = getMonthAngle(+d.key);
-                var halfAngle = (angles[1] - angles[0]) / 2;
-                return (halfAngle * outermostRadius) + (cornerRadius / 2);
-            })
-            .attr('dy', function (d) {
-                return (blockLength / 2) + (monthLabelSize / 3);
-            });
-            monthTextPath
-            .attr("xlink:href", function (d) {
-                return '#path-' + d.key;
-            })
-            .text(function (d) {
-                return MONTH_LABEL[+d.key]
-            });
-
-            var days = dayGroup.selectAll('.day')
-            .data(function (d) {
-                return d.values;
-            })
-            .on('mouseover', function (d) {
-                selectedValue = d.value;
-                counter = -1;
-                textTop.text("Day " + d.key).attr("y", -10);
-                updateCircle();
-            })
-            .on('mouseout', function () {
-                selectedValue = null;
-                textTop.text("").attr("y", -10);
-                counter = -1;
-                updateCircle();
-            });
-            days
-            .enter()
-            .append('path').attr('class', 'day')
-            .merge(days)
-            .attr('fill', function (d) {
-                return heatColor(d.value)
-            })
-            .attr('d', function (d, i) {
-                if (d.key == 1){
-                    counter = counter + 1;
-                }
-                var month = counter;
-                if(dayThetas[month] != undefined){
-                var thetaScale = dayThetas[month];
-                var selected = selectedValue === d.value;
-                return d3.arc()({
-                    innerRadius: selected ? 0 : dayInnerRadius,
-                    outerRadius: selected ? dayOuterRadius + (blockMargin / 2) : dayOuterRadius,
-                    startAngle: thetaScale(i),
-                    endAngle: thetaScale(i + 1)
-                });
-            }
-            })
-        }
-        function getMonthAngle(month) {
-        var startAngle = monthTheta(month);
-        var endAngle = monthTheta(month + 1);
-        return [startAngle, endAngle];
-        }
-    }
-    });
-    </script>
+    <div class="wrapper">
+  <h1>Parallax Flipping Cards</h1>
+  <div class="cols">
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(images/GoogleLogo.png)">
+                        <div class="inner">
+                            <p>Google Dataset</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="url(https://unsplash.it/511/511/)">
+                        <div class="inner">
+                            <p>Rocogged</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/502/502/)">
+                        <div class="inner">
+                            <p>Strizzes</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/503/503/)">
+                        <div class="inner">
+                            <p>Clossyo</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/504/504/">
+                        <div class="inner">
+                            <p>Rendann</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/505/505/)">
+                        <div class="inner">
+                            <p>Reflupper</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/506/506/)">
+                        <div class="inner">
+                            <p>Acirassi</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url(https://unsplash.it/508/508/)">
+                        <div class="inner">
+                            <p>Sohanidd</p>
+              <span>Lorem ipsum</span>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <div class="inner">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias cum repellat velit quae suscipit c.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
 </body>
 </html>
