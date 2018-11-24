@@ -1,5 +1,5 @@
 body {
-	background-color: #3E2723;
+	background-image: url("images/wood_background.jpg");
 	margin: 0px;
 	padding: 10px;
 }
@@ -7,7 +7,7 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color: #558B2F;
-	box-shadow: 10px 10px 10px #AAAAAA;
+	box-shadow: inset 0px 0px 10px #000000;
 	text-align: justify;
 	padding-top: 10px;
 }
