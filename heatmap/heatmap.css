@@ -1,0 +1,29 @@
+
+    .textTop {
+        font: 1.0em sans-serif;
+        color: black;
+        fill: #bbb;
+    }
+    .axis--grid .domain {
+        fill: #6666;
+        stroke: none;
+    }
+
+    .axis--x .domain,
+    .axis--grid .tick line {
+        stroke: #fff;
+    }
+
+    .axis--grid .tick--minor line {
+        stroke-opacity: .5;
+    }
+    .brush text {
+        fill:blue;
+        font-size: 0.75em;
+    }
+    #option {
+        position: absolute;
+        top: 500px;
+        right: 510px;
+    }
+
