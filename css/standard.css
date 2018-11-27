@@ -15,16 +15,41 @@ body {
 	text-align: justify;
 }
 h1 {
-	font-family: Indie Flower;
+	font-family: Work Sans, sans-serif;
 	text-align: center;
 	font-size: 2em;
 	font-weight: bold;
 }
 h2 {
-	font-family: Indie Flower;
+	font-family: Work Sans, sans-serif;
 	margin-bottom: 0px;
 }
 p, li {
-	font-family: Indie Flower;
+	font-family: Work Sans, sans-serif;
 	font-size: 1.2em;
+}
+#viz {
+	margin-top: 5%;
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	align-self: center;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333333;
+}
+
+li {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 19px 16px;
+	text-decoration: none;
+	font-size:2em;
+	font-family: Work Sans, sans-serif;
 }
