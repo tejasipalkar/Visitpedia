@@ -146,6 +146,8 @@ var Selected = {
       endDay: 31,
       year: 2016
     };
+    var startDate = new Date(Selected.year, Selected.startMonth, Selected.startDay);
+    var endDate = new Date(Selected.year, Selected.endMonth, Selected.endDay);
     var SelectedData = [];
     var counts = {};
     var ranks = {};
@@ -188,7 +190,7 @@ var Selected = {
       //Object.keys(counts).sort(function(a, b) {return -(counts[a] - counts[b])});
       //console.log(sortable);
       var topTen = sortable.slice(0, 10);
-      //console.log(topTen);
+      // /console.log(topTen);
       //var singleWord = [];
       function riverPushPoint(point){
         var timeRange = [];
@@ -235,11 +237,9 @@ var Selected = {
         obj.visible = false;
         obj.values = new Array();
         eventList.push(obj);
-        // var category = {};
-        // category.name = child[0];
-        // category.values = new Array();
-        // catList.push(category);
       });
+
+      //Prune top ten data
       Array.prototype.forEach.call(SelectedData, child => {
         eventList.some(function(el){
           if(el.label == child[0]){
@@ -249,14 +249,12 @@ var Selected = {
           }
         });
       });
-      var startDate = new Date(Selected.year, Selected.startMonth, Selected.startDay);
-      var endDate = new Date(Selected.year, Selected.endMonth, Selected.endDay);
-      console.log("eventList", eventList);
+      //console.log("SelectedData", SelectedData);
       // Array.prototype.forEach.call(eventList, child => {
-           var currentDate = new Date(Selected.year, Selected.startMonth, Selected.startDay);
+      //     var currentDate = new Date(startDate.getTime());
       //     var arrayDays = child.data;
       //     var i=0;
-      //     //arrayDays.forEach(function(dayEntry,i) {
+      //     arrayDays.forEach(function(dayEntry,i) {
       //     while(Number(currentDate) < Number(endDate)){
       //         if(Number(arrayDays[i].timeRange[0]) > Number(currentDate)){
       //           var object = {};
@@ -270,42 +268,40 @@ var Selected = {
       //           currentDate.setDate(currentDate.getDate() + 1);
       //         }
       //     }
-      //     //});
+      //     });
       //     console.log(arrayDays, Selected, currentDate);
       // });
       Array.prototype.forEach.call(eventList, child => {
         child.values = child.data;
       });
-      console.log("eventList", eventList);
+      //console.log("eventList", eventList);
       eventL = eventList;
       var riverData = {};
       riverData.data = eventList;
       riverData.group = "Events";
       var data = [];
       data.push(riverData);
-      // while(currentDate != startDate){
-      //   for(var i = 0; i < eventList.length; i++){
-      //     console.log();
-      //   }
-      //   currentDate.setDate(currentDate.getDate() + 1);
-      // }
-      //console.log("data", data);
+
+      console.log("-----Data Objects available------");
+      console.log("Raw data object for selected time period", SelectedData);
+      console.log("Top 10 calculated words", topTen);
+      console.log("Data object with 10 words (Required for Line chart)", eventList);
   });    
 
 
 //--------------------------------
 
-console.log("............Line Graph Data starts............");
+//console.log("............Line Graph Data starts............");
 
 d3.tsv("data.tsv", function(error, data) { 
   color.domain(d3.keys(data[0]).filter(function(key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
     return key !== "date"; 
   }));
-  console.log("eventL", eventL);
+  //console.log(data);
   data.forEach(function(d) { // Make every date in the csv data a javascript date object format
     d.date = parseDate(d.date);
   });
-      //console.log("data", data);
+  console.log("Data format required for LineChart", data);
   var categories = color.domain().map(function(name) { // Nest the data into an array of objects with new keys
 
     return {
@@ -320,7 +316,7 @@ d3.tsv("data.tsv", function(error, data) {
     };
   });
 
-      console.log("categories", categories);
+  //console.log("categories", categories);
   xScale.domain(d3.extent(data, function(d) { return d.date; })); // extent = highest and lowest points, domain is data, range is bouding box
 
   yScale.domain([0, 100
@@ -349,7 +345,7 @@ d3.tsv("data.tsv", function(error, data) {
   //plot the rect as the bar at the bottom
   context.append("path") // Path is created using svg.area details
     .attr("class", "area")
-    .attr("d", contextArea(eventL[0].values)) // pass first categories data .values to area path generator 
+    .attr("d", contextArea(categories[0].values)) // pass first categories data .values to area path generator 
     .attr("fill", "#F1F1F2");
     
   //append the brush for the selection of subsection  
@@ -379,7 +375,7 @@ d3.tsv("data.tsv", function(error, data) {
       .text("Issues Rating");
 
   var issue = svg.selectAll(".issue")
-      .data(eventL) // Select nested data and append to new svg group elements
+      .data(categories) // Select nested data and append to new svg group elements
     .enter().append("g")
       .attr("class", "issue");   
 
@@ -396,7 +392,7 @@ d3.tsv("data.tsv", function(error, data) {
       .style("stroke", function(d) { return color(d.name); });
 
   // draw legend
-  var legendSpace = 450 / eventL.length; // 450/number of issues (ex. 40)    
+  var legendSpace = 450 / categories.length; // 450/number of issues (ex. 40)    
 
   issue.append("rect")
       .attr("width", 10)
@@ -411,7 +407,7 @@ d3.tsv("data.tsv", function(error, data) {
       .on("click", function(d){ // On click make d.visible 
         d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
-        maxY = findMaxY(eventL); // Find max Y rating value categories data with "visible"; true
+        maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
         yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
         svg.select(".y.axis")
           .transition()
@@ -549,7 +545,7 @@ d3.tsv("data.tsv", function(error, data) {
           .transition()
           .call(xAxis);
 
-    maxY = findMaxY(eventL); // Find max Y rating value categories data with "visible"; true
+    maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
     yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
     
     svg.select(".y.axis") // Redraw yAxis
