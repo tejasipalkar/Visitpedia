@@ -15,7 +15,7 @@ var MONTH_LABEL = [
     ];
 
     var counter = -1;
-    d3.csv("sortedGoogleData.csv", function(error, data) {
+    d3.csv("demoGoogle.csv", function(error, data) {
         if (error) throw error;
         data.forEach(function(d) {
             d.Visit = +d.Visit;
@@ -236,7 +236,7 @@ var MONTH_LABEL = [
         .domain(d3.range(12))
         .range(["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f"]);
 
-        var heatColor = d3.scaleSequential(d3.interpolateYlOrRd).domain([5000000, 200000000]);
+        var heatColor = d3.scaleSequential(d3.interpolateYlOrRd).domain([1500000, 15000000]);
 
         svg.append("g")
         .attr("class", "legendLinear")
