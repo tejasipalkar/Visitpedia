@@ -17,7 +17,14 @@ body {
 h1 {
 	font-family: Indie Flower;
 	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+h2 {
+	font-family: Indie Flower;
+	margin-bottom: 0px;
 }
 p {
-	font-family: Comic Sans MS;
+	font-family: Indie Flower;
+	font-size: 1.2em;
 }
