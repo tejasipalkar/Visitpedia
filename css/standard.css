@@ -1,3 +1,6 @@
+html {
+	scroll-behavior: smooth;
+}
 body {
 	background-color: #FFFFFF;
 }
@@ -28,13 +31,6 @@ p, li {
 	font-family: Work Sans, sans-serif;
 	font-size: 1.2em;
 }
-#viz {
-	margin-top: 5%;
-	text-align: center;
-	align-items: center;
-	align-content: center;
-	align-self: center;
-}
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -52,4 +48,14 @@ li {
 	text-decoration: none;
 	font-size:2em;
 	font-family: Work Sans, sans-serif;
+}
+#v2, #v3, #v4 {
+	display: none;
+}
+#viz1, #viz2, #viz3, #viz4 {
+	margin-top: 5%;
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	align-self: center;
 }
