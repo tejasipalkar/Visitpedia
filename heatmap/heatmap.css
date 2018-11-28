@@ -26,4 +26,8 @@
         top: 500px;
         right: 510px;
     }
+    .next_button{
+        text-align: right;
+        margin-right: 17%;
+    }
 

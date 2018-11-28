@@ -14,7 +14,24 @@ var MONTH_LABEL = [
     'December'
     ];
 
+    var Selected = {
+            startMonth: 1,
+            endMonth: 12,
+            startDay: 1,
+            endDay: 31,
+            year: 2016
+        };
     var counter = -1;
+
+
+    function updateData(){
+        initiialize_viz2(Selected);
+        $('#v2').css("display", "block");
+        $('html, body').animate({
+            scrollTop: $("#v2").offset().top
+        }, 2000);
+    }
+
     d3.csv("dataWiki.csv", function(error, data) {
         if (error) throw error;
         data.forEach(function(d) {
@@ -36,7 +53,7 @@ var MONTH_LABEL = [
         var selectedValue = null,
         selectedMonth = null;
 
-    var svg = d3.select('svg');
+    var svg = d3.select('#visualization_1');
     var width = +svg.attr('width'),
     height = +svg.attr('height'),
     outermostRadius = Math.min(width, height) / 2 - 50,
@@ -62,16 +79,6 @@ var MONTH_LABEL = [
         .style("position","absolute")
         .style("left",width - 130)
         .style("top",height)
-
-        var btn = d3.select("#btnDiv").selectAll("button").data(['Update'])
-
-        btn = btn.enter().append("button").style("display","inline-block")
-
-        btn.each(function (d) {
-            this.innerText = d;
-        })
-
-        btn.on("click", updateData);
 
         var datavals = [2016,2017,2018];
         var slider = d3.sliderVertical()
@@ -218,18 +225,6 @@ var MONTH_LABEL = [
 
             day1 = d1[0];
             day2 = d1[1];
-        }
-
-        function updateData(){
-
-            var Selected = {
-                startMonth: month1,
-                endMonth: month2,
-                startDay: day1,
-                endDay: day2,
-                year: dataFiltered[0].key
-            };
-
         }
 
         var monthColor = d3.scaleOrdinal()
