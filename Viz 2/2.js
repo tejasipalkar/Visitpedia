@@ -3,7 +3,10 @@ function initiialize_viz2(Selected){
         $(document).on('click touch', '.series-segment', function (e) { 
 			console.log(e.target.__data__.val);
 			var label = e.target.__data__.val;
-
+			$('#v3').css("display", "block");
+	        $('html, body').animate({
+	            scrollTop: $("#v3").offset().top
+	        }, 1000);
 		 });
         $(function(){
 		  $('.toggle').on('click', function(event){

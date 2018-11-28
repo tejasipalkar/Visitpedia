@@ -27,7 +27,6 @@ var MONTH_LABEL = [
     function updateData(){
         initiialize_viz2(Selected);
         $('#v2').css("display", "block");
-        $('#v3').css("display", "block");
         $('html, body').animate({
             scrollTop: $("#v2").offset().top
         }, 1000);
