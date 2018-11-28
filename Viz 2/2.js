@@ -1,8 +1,9 @@
 function initiialize_viz2(Selected){
         console.log("2.js", Selected);
-        $(document).on('click touch', '.series-segment', function (e) { 
+        $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e.target.__data__.val);
 			var label = e.target.__data__.val;
+			word(label);
 			$('#v3').css("display", "block");
 	        $('html, body').animate({
 	            scrollTop: $("#v3").offset().top
@@ -46,11 +47,11 @@ function initiialize_viz2(Selected){
 				  	var day = parseInt(child[2], 10),
 					month = parseInt(child[3], 10),
 					year = parseInt(child[4], 10);
-					
+
 					if(year == Selected.year && month >= Selected.startMonth && month <= Selected.endMonth){
-						if((month == Selected.startMonth && day < Selected.startDay) || 
+						if((month == Selected.startMonth && day < Selected.startDay) ||
 							(month == Selected.endMonth && day > Selected.endDay)){
-							//Ignore entries	
+							//Ignore entries
 						}
 						else{
 							SelectedData.push(child);
@@ -122,6 +123,6 @@ function initiialize_viz2(Selected){
 				.maxLineHeight(20)
 				.zQualitative(true)
 				(document.getElementById('viz_2'));
-			
+
 		});
 }
