@@ -2,8 +2,16 @@ function initiialize_viz2(Selected){
         console.log("2.js", Selected);
         $(document).on('click touch', '.series-segment', function (e) { 
 			console.log(e.target.__data__.val);
-		 });
+			var label = e.target.__data__.val;
 
+		 });
+        $(function(){
+		  $('.toggle').on('click', function(event){
+		    event.preventDefault();
+		    $(this).toggleClass('active');
+		    $
+		  });
+		});
 		// var Selected = {
 		// 	startMonth: 1,
 		// 	endMonth: 12,
