@@ -85,7 +85,7 @@ var yScale = d3.scale.linear()
     .range([height, 0]);
 
 // 40 Custom DDV colors
-var color = d3.scale.ordinal().range(["#48A36D",  "#56AE7C",  "#64B98C", "#72C39B", "#80CEAA", "#80CCB3", "#7FC9BD", "#7FC7C6", "#7EC4CF", "#7FBBCF", "#7FB1CF", "#80A8CE", "#809ECE", "#8897CE", "#8F90CD", "#9788CD", "#9E81CC", "#AA81C5", "#B681BE", "#C280B7", "#CE80B0", "#D3779F", "#D76D8F", "#DC647E", "#E05A6D", "#E16167", "#E26962", "#E2705C", "#E37756", "#E38457", "#E39158", "#E29D58", "#E2AA59", "#E0B15B", "#DFB95C", "#DDC05E", "#DBC75F", "#E3CF6D", "#EAD67C", "#F2DE8A"]);
+var color = d3.scale.ordinal().range(['#808000', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6', '#bcf60c', '#fabebe']);
 
 
 var xAxis = d3.svg.axis()
@@ -156,7 +156,7 @@ var Selected = {
       //console.log(f);
       Array.prototype.forEach.call(f, child => {
         //console.log(child);
-        if(child[0] != "Title" && !child[0].startsWith('Special:') && child[0] != "404.php"&& !child[0].startsWith('User:') && !child[0].startsWith('File:')  && !child[0].startsWith('XXX') && !child[0].startsWith('Deaths') && !child[0].startsWith('List') && !child[0].startsWith('Template:')){
+        if(child[0] != "Title" && !child[0].startsWith('Special') && child[0] != "404.php"&& !child[0].startsWith('User:') && !child[0].startsWith('File')  && !child[0].startsWith('XXX') && !child[0].startsWith('Deaths') && !child[0].startsWith('List') && !child[0].startsWith('Template') && !child[0].startsWith('UserGoogleAnalitycs')){
             var day = parseInt(child[2], 10),
           month = parseInt(child[3], 10),
           year = parseInt(child[4], 10);
@@ -174,7 +174,6 @@ var Selected = {
               details.month = month;
               details.year = year;
               details.rank = child.rank;
-              //ranks.push([child[0], object);
             }
           }
         }
@@ -297,40 +296,60 @@ var Selected = {
         })
         .entries(SelectedData);
 
-    console.log(nest);
+    	console.log(nest);
 
-  });
+    	var dataArray = new Array;
+		topTen.forEach(function(d) {
+		    dataArray.push(d[0]);
+		});
 
+    	nest.forEach(function(d){
+    		var nameList = d.values;
+        var newArray = [];
+  			for(var i = 0; i < nameList.length; i++){
+  				var key = Object.values(nameList[i])[0];
+  				var val = Object.values(nameList[i])[1];
+          if(dataArray.includes(key))
+            d[key] = val.toString();
+  			}
+        dataArray.forEach(function(x){
+            var name_array = Object.keys(d);
+            if(!name_array.includes(x)){
+              d[x] = "";
+            }
+        });
 
-//--------------------------------
+        var date = d.key;
+        d.date = new Date(date);
+        delete d.key;
+        delete d.values;
+    	});
+    	console.log(nest);
 
-//console.log("............Line Graph Data starts............");
-
-d3.tsv("data.tsv", function(error, data) {
-  color.domain(d3.keys(data[0]).filter(function(key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
+      color.domain(d3.keys(nest[0]).filter(function(key) { // Set the domain of the color ordinal scale to be all the csv headers except "date", matching a color to an issue
     return key !== "date";
   }));
   //console.log(data);
-  data.forEach(function(d) { // Make every date in the csv data a javascript date object format
-    d.date = parseDate(d.date);
-  });
-  console.log("Data format required for LineChart", data);
-  var categories = color.domain().map(function(name) { // Nest the data into an array of objects with new keys
+  // nest.forEach(function(d) { // Make every date in the csv data a javascript date object format
+  //   d.date = parseDate(d.date);
+  // });
+  //console.log("Data format required for LineChart", nest);
+  // var categories = color.domain().map(function(name) { // Nest the data into an array of objects with new keys
 
-    return {
-      name: name, // "name": the csv headers except date
-      values: data.map(function(d) { // "values": which has an array of the dates and ratings
-        return {
-          date: d.date,
-          rating: +(d[name]),
-          };
-      }),
-      visible: (name === "Unemployment" ? true : false) // "visible": all false except for economy which is true.
-    };
-  });
+  //   return {
+  //     name: name, // "name": the csv headers except date
+  //     values: nest.map(function(d) { // "values": which has an array of the dates and ratings
+  //       return {
+  //         date: d.date,
+  //         rating: +(d[name]),
+  //         };
+  //     }),
+  //     visible: (name === "Unemployment" ? true : false) // "visible": all false except for economy which is true.
+  //   };
+  // });
 
   //console.log("categories", categories);
-  xScale.domain(d3.extent(data, function(d) { return d.date; })); // extent = highest and lowest points, domain is data, range is bouding box
+  xScale.domain(d3.extent(nest, function(d) { return d.date; })); // extent = highest and lowest points, domain is data, range is bouding box
 
   yScale.domain([0, 100
     //d3.max(categories, function(c) { return d3.max(c.values, function(v) { return v.rating; }); })
@@ -358,7 +377,7 @@ d3.tsv("data.tsv", function(error, data) {
   //plot the rect as the bar at the bottom
   context.append("path") // Path is created using svg.area details
     .attr("class", "area")
-    .attr("d", contextArea(categories[0].values)) // pass first categories data .values to area path generator
+    .attr("d", contextArea(eventList[0].values)) // pass first categories data .values to area path generator
     .attr("fill", "#F1F1F2");
 
   //append the brush for the selection of subsection
@@ -388,7 +407,7 @@ d3.tsv("data.tsv", function(error, data) {
       .text("Issues Rating");
 
   var issue = svg.selectAll(".issue")
-      .data(categories) // Select nested data and append to new svg group elements
+      .data(eventList) // Select nested data and append to new svg group elements
     .enter().append("g")
       .attr("class", "issue");
 
@@ -405,7 +424,7 @@ d3.tsv("data.tsv", function(error, data) {
       .style("stroke", function(d) { return color(d.name); });
 
   // draw legend
-  var legendSpace = 450 / categories.length; // 450/number of issues (ex. 40)
+  var legendSpace = 450 / eventList.length; // 450/number of issues (ex. 40)
 
   issue.append("rect")
       .attr("width", 10)
@@ -420,7 +439,7 @@ d3.tsv("data.tsv", function(error, data) {
       .on("click", function(d){ // On click make d.visible
         d.visible = !d.visible; // If array key for this data selection is "visible" = true then make it false, if false then make it true
 
-        maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
+        maxY = findMaxY(eventList); // Find max Y rating value categories data with "visible"; true
         yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
         svg.select(".y.axis")
           .transition()
@@ -486,7 +505,7 @@ d3.tsv("data.tsv", function(error, data) {
             .attr("x", width - 150) // hover date text position
             .style("fill", "#E6E7E8");
 
-  var columnNames = d3.keys(data[0]) //grab the key values from your first data row
+  var columnNames = d3.keys(nest[0]) //grab the key values from your first data row
                                      //these are the same as your column names
                   .slice(1); //remove the first column name (`date`);
 
@@ -531,10 +550,10 @@ d3.tsv("data.tsv", function(error, data) {
       // Legend tooltips // http://www.d3noob.org/2014/07/my-favourite-tooltip-method-for-line.html
 
       var x0 = xScale.invert(d3.mouse(this)[0]), /* d3.mouse(this)[0] returns the x position on the screen of the mouse. xScale.invert function is reversing the process that we use to map the domain (date) to range (position on screen). So it takes the position on the screen and converts it into an equivalent date! */
-      i = bisectDate(data, x0, 1), // use our bisectDate function that we declared earlier to find the index of our data array that is close to the mouse cursor
+      i = bisectDate(nest, x0, 1), // use our bisectDate function that we declared earlier to find the index of our data array that is close to the mouse cursor
       /*It takes our data array and the date corresponding to the position of or mouse cursor and returns the index number of the data array which has a date that is higher than the cursor position.*/
-      d0 = data[i - 1],
-      d1 = data[i],
+      d0 = nest[i - 1],
+      d1 = nest[i],
       /*d0 is the combination of date and rating that is in the data array at the index to the left of the cursor and d1 is the combination of date and close that is in the data array at the index to the right of the cursor. In other words we now have two variables that know the value and date above and below the date that corresponds to the position of the cursor.*/
       d = x0 - d0.date > d1.date - x0 ? d1 : d0;
       /*The final line in this segment declares a new array d that is represents the date and close combination that is closest to the cursor. It is using the magic JavaScript short hand for an if statement that is essentially saying if the distance between the mouse cursor and the date and close combination on the left is greater than the distance between the mouse cursor and the date and close combination on the right then d is an array of the date and close on the right of the cursor (d1). Otherwise d is an array of the date and close on the left of the cursor (d0).*/
@@ -558,7 +577,7 @@ d3.tsv("data.tsv", function(error, data) {
           .transition()
           .call(xAxis);
 
-    maxY = findMaxY(categories); // Find max Y rating value categories data with "visible"; true
+    maxY = findMaxY(eventList); // Find max Y rating value categories data with "visible"; true
     yScale.domain([0,maxY]); // Redefine yAxis domain based on highest y value of categories data with "visible"; true
 
     svg.select(".y.axis") // Redraw yAxis
@@ -572,8 +591,17 @@ d3.tsv("data.tsv", function(error, data) {
       });
 
   };
+  });
 
-}); // End Data callback function
+
+//--------------------------------
+
+//console.log("............Line Graph Data starts............");
+
+// d3.tsv("data.tsv", function(error, data) {
+  
+
+// }); // End Data callback function
 
   function findMaxY(data){  // Define function "findMaxY"
     var maxYValues = data.map(function(d) {
