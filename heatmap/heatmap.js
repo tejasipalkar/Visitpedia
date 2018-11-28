@@ -30,10 +30,7 @@ var MONTH_LABEL = [
         $('#v3').css("display", "block");
         $('html, body').animate({
             scrollTop: $("#v2").offset().top
-        }, 2000);
-        var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year;
-        console.log(string);
-        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index.html'+string+'" width="75%" height="600"></object>';
+        }, 1000);
     }
 
     d3.csv("dataWiki.csv", function(error, data) {

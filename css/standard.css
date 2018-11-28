@@ -61,7 +61,7 @@ li {
 	align-self: center;
 }
 .toggle-container{
-	margin-top: 5%;
+	margin: 0% 5%;
 	text-align: center;
 }
 .toggle{
@@ -105,4 +105,8 @@ li {
 }
 .active .toggle-label-on {
   color: #3498DB;
+}
+#viz2b{
+	display: none;
+	text-align: center;
 }

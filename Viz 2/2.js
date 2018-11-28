@@ -9,8 +9,20 @@ function initiialize_viz2(Selected){
 		  $('.toggle').on('click', function(event){
 		    event.preventDefault();
 		    $(this).toggleClass('active');
-		    $
+		    if($('.toggle').hasClass('active')){
+		    	$('#viz2').hide();
+		    	$('#viz2b').show();
+		    }
+		    else{
+		    	$('#viz2').show();
+		    	$('#viz2b').hide();
+		    }
 		  });
+		});
+		$( document ).ready(function() {
+		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year;
+	        console.log(string);
+	        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index.html'+string+'" width="80%" height="520"></object>';
 		});
 		// var Selected = {
 		// 	startMonth: 1,
