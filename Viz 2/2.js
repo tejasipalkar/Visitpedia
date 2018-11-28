@@ -107,6 +107,6 @@ function initiialize_viz2(Selected){
 				.maxLineHeight(20)
 				.zQualitative(true)
 				(document.getElementById('viz_2'));
-			//console.log();
+			
 		});
 }

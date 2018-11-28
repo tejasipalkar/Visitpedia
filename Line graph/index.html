@@ -65,6 +65,13 @@ body {
 <body>
 <script src="http://d3js.org/d3.v3.js"></script>
 <script>
+  var params = location.href.split('?')[1].split('&');
+  Selected = {};
+  for (x in params)
+   {
+      Selected[params[x].split('=')[0]] = params[x].split('=')[1];
+   }
+   console.log("params", Selected)
 var eventL = [];
 var margin = {top: 20, right: 200, bottom: 100, left: 50},
     margin2 = { top: 430, right: 10, bottom: 20, left: 40 },
@@ -139,13 +146,6 @@ svg.append("defs")
 
 //end slider part-----------------------------------------------------------------------------------
 
-var Selected = {
-      startMonth: 1,
-      endMonth: 1,
-      startDay: 1,
-      endDay: 31,
-      year: 2016
-    };
     var startDate = new Date(Selected.year, Selected.startMonth, Selected.startDay);
     var endDate = new Date(Selected.year, Selected.endMonth, Selected.endDay);
     var SelectedData = [];
