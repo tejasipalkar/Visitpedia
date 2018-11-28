@@ -14,22 +14,25 @@ var MONTH_LABEL = [
     'December'
     ];
 
-    var Selected = {
-            startMonth: 1,
-            endMonth: 12,
-            startDay: 1,
-            endDay: 31,
-            year: 2016
-        };
+    var Selected = {};
     var counter = -1;
 
+    function isEmpty(obj) {
+        for(var prop in obj) {
+            if(obj.hasOwnProperty(prop))
+                return false;
+        }
+        return true;
+    }
 
     function updateData(){
-        initiialize_viz2(Selected);
-        $('#v2').css("display", "block");
-        $('html, body').animate({
-            scrollTop: $("#v2").offset().top
-        }, 1000);
+        if(!isEmpty(Selected)){
+            initiialize_viz2(Selected);
+            $('#v2').css("display", "block");
+            $('html, body').animate({
+                scrollTop: $("#v2").offset().top
+            }, 1000);
+        }
     }
 
     d3.csv("dataWiki.csv", function(error, data) {
@@ -71,14 +74,14 @@ var MONTH_LABEL = [
 
     function heatmap(){
 
-        d3.select("svg").append("div")
+        // d3.select("svg").append("div")
 
-        .attr("id","btnDiv")
-        .style('font-size','75%')
-        .style("width","300px")
-        .style("position","absolute")
-        .style("left",width - 130)
-        .style("top",height)
+        // .attr("id","btnDiv")
+        // .style('font-size','75%')
+        // .style("width","300px")
+        // .style("position","absolute")
+        // .style("left",width - 130)
+        // .style("top",height)
 
         var datavals = [2016,2017,2018];
         var slider = d3.sliderVertical()
@@ -225,6 +228,14 @@ var MONTH_LABEL = [
 
             day1 = d1[0];
             day2 = d1[1];
+
+            Selected = {
+                startMonth: month1,
+                endMonth: month2,
+                startDay: day1,
+                endDay: day2,
+                year: dataFiltered[0].key
+            }
         }
 
         var monthColor = d3.scaleOrdinal()
