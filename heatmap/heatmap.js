@@ -54,7 +54,7 @@ var MONTH_LABEL = [
 
     function heatmap(){
 
-        d3.select("body").append("div")
+        d3.select("svg").append("div")
 
         .attr("id","btnDiv")
         .style('font-size','75%')

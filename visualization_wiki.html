@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
-
+<head>
 	<title>Visitpedia: Wikipedia Dataset</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="css/standard.css" />
-	
+
 	<link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet' />
 
 	<script src="js/showDiv.js"></script>
 
+	<link rel = "stylesheet" href = "heatmap/heatmap.css"></link>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+    <script src = "heatmap/heatmap.js"></script>
 </head>
 
 <body>
@@ -38,18 +44,16 @@
 				<h3>Heatmap</h3>
 				<p>Brief explanation</p>
 			</div>
-			<div>
-				<object id="svg" type="image/svg+xml" data="heatmap/heatmap.html" width="75%" height="600"></object>
-				<script type="text/javascript" src="heatmap/heatmap.js"></script>
-				<script type="text/javascript" src="2.js"></script>
+			<div id = "heatmap">
+				<svg width="960" height="500"></svg>
 			</div>
 		</div>
 
-		<button onclick="showViz2()">Hello</button>
-	</div>
+<!-- 		<button onclick="showViz2()">Hello</button>
+ -->	</div>
 
 
-	<div id="v2">
+	<!-- <div id="v2">
 		<hr style="height:1px; border:none; color:#000000; background-color:#000000; width:95%; margin-left:auto; margin-right:auto;" />
 
 		<div id="viz2">
@@ -99,7 +103,7 @@
 				<script type="text/javascript" src="2.js"></script>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 </body>
 </html>
