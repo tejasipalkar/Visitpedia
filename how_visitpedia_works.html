@@ -4,10 +4,10 @@
 	<title>How VisitPedia Works?</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="css/standard.css" />
 	<link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet'>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 
@@ -20,6 +20,7 @@
 				<h2>A visualization tool for analyzing<br>trends on internet.</h2>
 				<a href="index.html" class="button big alt"><span>Home</span></a>
 			</div>
+
 			<a href="index.html" class="button hidden"><span>Home</span></a>
 		</div>
 	</header>
@@ -29,12 +30,29 @@
 		<li style="float:right; margin-right:20%;">Keeps you trending</li>
 	</ul>
 
-	<div class="board">
+	 <div class="board" style="position: relative;">
 		<h1>How VisitPedia Works</h1>
 		<p>The working of Visitpedia has been demonstrated below:<br>
-		   Select the screen you want to go to from the home screen.
+		   <div id="step1">
+		   	<p>1.Select a dataset from the home page<br></p>
+		   </div>	
+		   <div id="step2">
+		   <p>2.The first visualisation that you see will be heatmap. Select the year , month and day and click Select, you will be taken to next visualisation
+		   The calender view in the center of the visualisation demonstrates the total no. of visit counts for that day of the month and has been color encoded based on the no.of visit counts</p>
+			</div>
+		   <div id ="step 3">
+		   <p>3.For the selected timeframe, you should now see all the critical keywords having significant visit count clustered into events and being displayed on the critical event river.
+		   If you toggle and go to the text line chart visualization, you shall see the pattern in which the top ten words of the event have  been trending depicting whether it was a sudden or continuous event.</p>
+		   </div>
+		  <div id ="step 4">
+		  	<p>4. The last visualisation is a word cloud that clusters the keywords in the event with keywords in the the other events and together depicts a real world event. </p>
+		  </div>
+
 		</p>
-	
+  
+
+
+	 	
 
 </body>
 </html>
