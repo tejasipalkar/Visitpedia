@@ -31,6 +31,11 @@ var MONTH_LABEL = [
             document.getElementById('viz2b').innerHTML = "";
             document.getElementById('viz_2').innerHTML = "";
             $(".toggle").prop("onclick", null).off("click");
+            if($('.toggle').hasClass('active')){
+                $('#viz2').show();
+                $('#viz2b').hide();
+                $(".toggle").removeClass("active");
+            }
             $('#v2').css("display", "block");
             $('html, body').animate({
                 scrollTop: $("#v2").offset().top
