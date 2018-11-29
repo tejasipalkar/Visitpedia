@@ -28,6 +28,9 @@ var MONTH_LABEL = [
     function updateData(){
         if(!isEmpty(Selected)){
             initiialize_viz2(Selected);
+            document.getElementById('viz2b').innerHTML = "";
+            document.getElementById('viz_2').innerHTML = "";
+            $(".toggle").prop("onclick", null).off("click");
             $('#v2').css("display", "block");
             $('html, body').animate({
                 scrollTop: $("#v2").offset().top
