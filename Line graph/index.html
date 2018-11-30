@@ -227,11 +227,14 @@ svg.append("defs")
         });
       }
       var eventList = [];
-      Array.prototype.forEach.call(topTen, child => {
+      topTen.forEach(function(child, index){
         var obj = {};
         obj.label = obj.name = child[0];
         obj.data = new Array();
         obj.visible = false;
+        if(index < 2){
+          obj.visible = true;
+        }
         obj.values = new Array();
         eventList.push(obj);
       });
