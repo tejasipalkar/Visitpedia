@@ -1,5 +1,6 @@
-function word(label, SelectedColor){
+function word(label, SelectedColor, visitCounts){
 
+console.log(visitCounts);
 var width = 700,
     height = 700;
 
@@ -175,18 +176,35 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             }
 
             function splitvals(arr, n) {
-                var res = [];
-                while (arr.length) {
-                    res.push(arr.splice(0, n));
+                var rest = arr.length % n, // how much to divide
+                restUsed = rest, // to keep track of the division over the elements
+                partLength = Math.floor(arr.length / n),
+                result = [];
+
+                for(var i = 0; i < arr.length; i += partLength) {
+                    var end = partLength + i,
+                    add = false;
+
+                    if(rest !== 0 && restUsed) { // should add one element for the division
+                        end++;
+                        restUsed--; // we've used one division element now
+                        add = true;
+                    }
+
+                    result.push(arr.slice(i, end)); // part of the array
+
+                    if(add) {
+                        i++; // also increment i in the case we added an extra element for division
+                    }
                 }
-                return res;
+
+            return result;
             }
 
             var values = words.split(',');
 
             if (values.length > 6){
-                var newvals = splitvals(values,values.length/3);
-                console.log(newvals)
+                var newvals = splitvals(values,3);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull2.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull3.datum(d3.polygonHull(vertices3)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
@@ -211,7 +229,6 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 myWordCloud.update(getWords(values));
             }
             else{
-                console.log(values);
                     randomX = d3.randomUniform(width/1.2, 60),
                     randomY = d3.randomUniform(height/1.2, 60),
                     vertices = d3.range(100).map(function() { return [randomX(), randomY()]; });
