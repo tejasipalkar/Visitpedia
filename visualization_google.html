@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="css/standard.css" />
 	<link rel = "stylesheet" href = "heatmap/heatmap.css"></link>
+	<link rel = "stylesheet" href = "Evolution/evolution.css"></link>
+
 	<!--	JS	Libraries -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
@@ -48,12 +50,10 @@
 			<div>
 				<h3>Heatmap</h3>
 				<p>Brief explanation</p>
-
 			</div>
-			<div id = "heatmap">
-				<svg id="visualization_1" width="960" height="500"></svg>
-				<div class="next_button"><button id="next_butt">Select -></button></div>
+			<div id ="heatmap">
 			</div>
+			<div class="next_button"><button id="next_butt"">Select -></button></div>
 		</div>
 	</div>
 
@@ -113,7 +113,7 @@
 		</div>
 	</div> -->
 <script type="text/javascript">
-	$( document ).ready(function() {		
+	$( document ).ready(function() {
     	$( "#next_butt" ).click(function() {
 		  	updateData("RankGoogleData.csv");
 		});
