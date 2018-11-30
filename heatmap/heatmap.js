@@ -31,10 +31,13 @@ var MONTH_LABEL = [
     function updateData(dataset){
         if(!isEmpty(Selected)){
             Selected.dataset = dataset;
-            initiialize_viz2(Selected);
             document.getElementById('viz2b').innerHTML = "";
             document.getElementById('viz_2').innerHTML = "";
+            $("#viz3svg").empty();
+            document.getElementById('area1').innerHTML = "";
             $(".toggle").prop("onclick", null).off("click");
+            $('#v3').css("display", "none");
+            initiialize_viz2(Selected);
             if($('.toggle').hasClass('active')){
                 $('#viz2').show();
                 $('#viz2b').hide();
@@ -314,6 +317,8 @@ var MONTH_LABEL = [
                 endDay: day2,
                 year: dataFiltered[0].key
             }
+            $(".series-segment").prop("onclick", null).off("click");
+            console.log("BRush Ended");
         }
 
         var monthColor = d3.scaleOrdinal()
