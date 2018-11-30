@@ -1,6 +1,5 @@
-function word(label, SelectedColor, visitCounts){
+function word(label, SelectedColor, visitCounts1, visitCounts2){
 
-console.log(visitCounts);
 var width = 700,
     height = 700;
 
@@ -49,6 +48,32 @@ hull3.style("fill", SelectedColor)
 var hull4 = svg.append("path");
 
 hull4.style("fill", SelectedColor)
+    .style("fill-opacity",0.25);
+
+var svg2 = d3.select("#area2").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg2.append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+var hull5 = svg2.append("path")
+    .attr("class", "hull");
+
+var hull6 = svg2.append("path");
+
+hull6.style("fill", SelectedColor)
+    .style("fill-opacity",1);
+
+var hull7 = svg2.append("path");
+
+hull7.style("fill", SelectedColor)
+    .style("fill-opacity",0.5);
+
+var hull8 = svg2.append("path");
+
+hull8.style("fill", SelectedColor)
     .style("fill-opacity",0.25);
 
 vertices.forEach(function(d){
@@ -200,6 +225,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
             return result;
             }
+
             var values = words.split(',');
             console.log(values);
             if (values.length > 6){
@@ -216,6 +242,21 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
                 myWordCloud = wordCloud(svg,x3/1.4,y3/1.3,270,270);
                 myWordCloud.update(getWords(newvals[2]));
+
+
+
+                hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                hull6.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                hull7.datum(d3.polygonHull(vertices3)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                hull8.datum(d3.polygonHull(vertices4)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                var myWordCloud = wordCloud(svg2,x1/1.7,y1/1.7,270,270);
+                myWordCloud.update(getWords(newvals[0]));
+
+                myWordCloud = wordCloud(svg2,x2/1.3,y2/1.7,270,270);
+                myWordCloud.update(getWords(newvals[1]));
+
+                myWordCloud = wordCloud(svg2,x3/1.4,y3/1.3,270,270);
+                myWordCloud.update(getWords(newvals[2]));
             }
             else if(values.length == 1){
                 values = [label];
@@ -226,6 +267,10 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
+
+                hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                var myWordCloud = wordCloud(svg2,x/2,y/2,width/1.4,height/1.4);
+                myWordCloud.update(getWords(values));
             }
             else{
                     randomX = d3.randomUniform(width/1.2, 60),
@@ -234,6 +279,10 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
+                myWordCloud.update(getWords(values));
+
+                hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
+                var myWordCloud = wordCloud(svg2,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
             }
   });

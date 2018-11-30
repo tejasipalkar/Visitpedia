@@ -17,6 +17,9 @@ var MONTH_LABEL = [
     var Selected = {};
     var counter = -1;
 
+    var width = 960;
+        height = 500;
+
     function isEmpty(obj) {
         for(var prop in obj) {
             if(obj.hasOwnProperty(prop))
@@ -65,10 +68,10 @@ var MONTH_LABEL = [
         var selectedValue = null,
         selectedMonth = null;
 
-    var svg = d3.select('#visualization_1');
-    var width = +svg.attr('width'),
-    height = +svg.attr('height'),
-    outermostRadius = Math.min(width, height) / 2 - 50,
+    var svg = d3.select('#heatmap').append('svg')
+        .attr('width',width)
+        .attr('height',height);
+    var outermostRadius = Math.min(width, height) / 2 - 50,
     blockLength = outermostRadius * 0.2,
     blockMargin = outermostRadius * 0.05,
     monthInnerRadius = outermostRadius - blockLength,
@@ -83,35 +86,101 @@ var MONTH_LABEL = [
 
     function heatmap(){
 
-        // d3.select("svg").append("div")
+        // var datavals = [2016,2017,2018];
+        // var slider = d3.sliderVertical()
+        // .min(2016)
+        // .max(2018)
+        // .ticks(2)
+        // .tickFormat(d3.format(''))
+        // .height(400)
+        // .marks(datavals)
+        // .default(dataFiltered[0].key)
+        // .on('onchange', val => {
+        //     svg.selectAll("*").remove();
+        //     dataFiltered = nest2.filter(function (d){ return d.key == val});
+        //     heatmap();
+        // });
 
-        // .attr("id","btnDiv")
-        // .style('font-size','75%')
-        // .style("width","300px")
-        // .style("position","absolute")
-        // .style("left",width - 130)
-        // .style("top",height)
+        // var group = svg.append("g")
+        // .attr("class", "slider")
+        // .attr("transform", "translate(" + 60 + "," + 30 + ")");
 
-        var datavals = [2016,2017,2018];
-        var slider = d3.sliderVertical()
-        .min(2016)
-        .max(2018)
-        .ticks(2)
-        .tickFormat(d3.format(''))
-        .height(400)
-        .marks(datavals)
-        .default(dataFiltered[0].key)
-        .on('onchange', val => {
-            svg.selectAll("*").remove();
-            dataFiltered = nest2.filter(function (d){ return d.key == val});
-            heatmap();
-        });
+        // group.call(slider);
 
-        var group = svg.append("g")
-        .attr("class", "slider")
-        .attr("transform", "translate(" + 60 + "," + 30 + ")");
+        var allButtons= svg.append("g")
+                .attr("id","allButtons")
 
-        group.call(slider);
+            var labels= ['2016','2017','2018'];
+
+            var defaultColor = d3.rgb(119,119,187);
+            var hoverColor= "#0000ff";
+            var pressedColor= "#000077";
+
+            var buttonGroups= allButtons.selectAll("g.button")
+                                    .data(labels)
+                                    .enter()
+                                    .append("g")
+                                    .attr("class","button")
+                                    .style("cursor","pointer")
+                                    .on("click",function(d,i) {
+                                        if(i == 0){
+                                            i = 2016;
+                                        }
+                                        else if(i == 1){
+                                            i = 2017;
+                                        }
+                                        else{
+                                            i = 2018;
+                                        }
+                                        svg.selectAll("*").remove();
+                                        dataFiltered = nest2.filter(function (d){ return d.key == i});
+                                        heatmap();
+                                        d3.select(this)
+                                            .select("rect")
+                                            .style("fill",pressedColor);
+                                    })
+                                    .on("mouseover", function() {
+                                        if (d3.select(this).select("rect").attr("fill") != pressedColor) {
+                                            d3.select(this)
+                                                .select("rect")
+                                                .style("fill",hoverColor);
+                                        }
+                                    })
+                                    .on("mouseout", function() {
+                                        if (d3.select(this).select("rect").attr("fill") != pressedColor) {
+                                            d3.select(this)
+                                                .select("rect")
+                                                .style("fill",defaultColor);
+                                        }
+                                    })
+
+            var bWidth= 40;
+            var bHeight= 25;
+            var bSpace= 10;
+            var x0= 20;
+            var y0= 10;
+
+            buttonGroups.append("rect")
+                        .attr("class","buttonRect")
+                        .attr("width",bWidth)
+                        .attr("height",bHeight)
+                        .attr("x",function(d,i) {return x0+(bWidth+bSpace)*i;})
+                        .attr("y",y0)
+                        .attr("rx",5)
+                        .attr("ry",5)
+                        .style("fill",defaultColor)
+
+            buttonGroups.append("text")
+                        .attr("class","buttonText")
+                        .attr("font-family","FontAwesome")
+                        .attr("x",function(d,i) {
+                            return x0 + (bWidth+bSpace)*i + bWidth/2;
+                        })
+                        .attr("y",y0+bHeight/2)
+                        .attr("text-anchor","middle")
+                        .attr("dominant-baseline","central")
+                        .attr("fill","black")
+                        .text(function(d) {return d;})
 
         var len = dataFiltered[0].values.length;
 
