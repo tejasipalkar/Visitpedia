@@ -3,7 +3,7 @@ function initiialize_viz2(Selected){
 			console.log(e.target.__data__.val);
 			var label = e.target.__data__.val;
 			var color = e.target.attributes.style.textContent.substring(6,22);
-			word(label, color);
+			word(label, color, ranks);
 			$('#v3').css("display", "block");
 	        $('html, body').animate({
 	            scrollTop: $("#v3").offset().top
@@ -32,14 +32,12 @@ function initiialize_viz2(Selected){
 		var ranks = {};
 		console.log(Selected.dataset);
 		d3.csv("data/"+Selected.dataset, function(f){
-			//if (error) throw error;
-			//console.log(f);
 			Array.prototype.forEach.call(f, child => {
-			  //console.log(child);
 				if(child[0] != "Title" && !child[0].startsWith('Special:') && child[0] != "404.php"&& !child[0].startsWith('User:') && !child[0].startsWith('File:')  && !child[0].startsWith('XXX') && !child[0].startsWith('Deaths') && !child[0].startsWith('List') && !child[0].startsWith('Template:')){
 				  	var day = parseInt(child[2], 10),
 					month = parseInt(child[3], 10),
-					year = parseInt(child[4], 10);
+					year = parseInt(child[4], 10),
+					visitCount = parseInt(child[1], 10);
 
 					if(year == Selected.year && month >= Selected.startMonth && month <= Selected.endMonth){
 						if((month == Selected.startMonth && day < Selected.startDay) ||
@@ -47,19 +45,14 @@ function initiialize_viz2(Selected){
 							//Ignore entries
 						}
 						else{
-							SelectedData.push(child);
 							counts[child[0]] = 1 + (counts[child[0]] || 0);
-							var details = {};
-							details.day = day;
-							details.month = month;
-							details.year = year;
-							details.rank = child.rank;
-							//ranks.push([child[0], object);
+							ranks[child[0]] = (ranks[child[0]]|| 0 ) + visitCount;
+							SelectedData.push(child);
 						}
 					}
 				}
 			});
-			//console.log(counts);
+			console.log(ranks);
 			var sortable = [];
 			for (var key in counts) {
 			    sortable.push([key, counts[key]]);
@@ -67,11 +60,8 @@ function initiialize_viz2(Selected){
 			sortable.sort(function(a, b) {
 			    return b[1] - a[1];
 			});
-			//Object.keys(counts).sort(function(a, b) {return -(counts[a] - counts[b])});
 			console.log(sortable);
 			var topTen = sortable.slice(0, 10);
-			//console.log(topTen);
-			//var singleWord = [];
 			function pushSinglePoint(point){
 				var timeRange = [];
 				var day = parseInt(point[2], 10),
@@ -84,7 +74,6 @@ function initiialize_viz2(Selected){
 					"val": point[0],
 					"rank": point.Rank
 				}
-				//console.log(obj);
 				return obj;
 			}
 			var eventList = [];
@@ -94,7 +83,6 @@ function initiialize_viz2(Selected){
 				obj.data = new Array();
 				eventList.push(obj);
 			});
-			//console.log(eventList);
 			Array.prototype.forEach.call(SelectedData, child => {
 				eventList.some(function(el){
 					if(el.label == child[0]){
@@ -116,6 +104,5 @@ function initiialize_viz2(Selected){
 				.maxLineHeight(20)
 				.zQualitative(true)
 				(document.getElementById('viz_2'));
-
 		});
 }
