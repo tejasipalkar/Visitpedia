@@ -1,4 +1,4 @@
-function word(label, selectedColor){
+function word(label, selectedColor, visitCounts){
 function wordCloud(selector) {
     console.log(selectedColor);
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
