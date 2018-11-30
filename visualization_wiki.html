@@ -52,7 +52,7 @@
 			</div>
 			<div id = "heatmap">
 				<svg id="visualization_1" width="960" height="500"></svg>
-				<div class="next_button"><button onclick="updateData();">Select -></button></div>
+				<div class="next_button"><button id="next_butt"">Select -></button></div>
 			</div>
 		</div>
 	</div>
@@ -112,6 +112,12 @@
 			</div>
 		</div>
 	</div> -->
-
+<script type="text/javascript">
+	$( document ).ready(function() {		
+    	$( "#next_butt" ).click(function() {
+		  	updateData("RankWikiData.csv");
+		});
+	});
+</script>
 </body>
 </html>

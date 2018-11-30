@@ -1,5 +1,4 @@
 function initiialize_viz2(Selected){
-        console.log("2.js", Selected);
         $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e.target.__data__.val);
 			var label = e.target.__data__.val;
@@ -25,20 +24,13 @@ function initiialize_viz2(Selected){
 		});
 		$( document ).ready(function() {
 		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year;
-	        console.log(string);
 	        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index.html'+string+'" width="80%" height="520"></object>';
 		});
-		// var Selected = {
-		// 	startMonth: 1,
-		// 	endMonth: 12,
-		// 	startDay: 1,
-		// 	endDay: 31,
-		// 	year: 2016
-		// };
 		var SelectedData = [];
 		var counts = {};
 		var ranks = {};
-		d3.csv("data/RankWikiData.csv", function(f){
+		console.log(Selected.dataset);
+		d3.csv("data/"+Selected.dataset, function(f){
 			//if (error) throw error;
 			//console.log(f);
 			Array.prototype.forEach.call(f, child => {

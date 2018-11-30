@@ -44,7 +44,7 @@ var MONTH_LABEL = [
         }
     }
 
-    d3.csv("data/dataWiki.csv", function(error, data) {
+    d3.csv("data/dataGoogle.csv", function(error, data) {
         if (error) throw error;
         data.forEach(function(d) {
             d.Visit = +d.Visit;
