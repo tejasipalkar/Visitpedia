@@ -111,3 +111,7 @@ li {
 	display: none;
 	text-align: center;
 }
+.inBoard {
+	font-family: Work Sans, sans-serif;
+	text-align: justify;
+}
