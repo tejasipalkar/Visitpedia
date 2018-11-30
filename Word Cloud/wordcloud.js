@@ -1,6 +1,6 @@
-function word(Selected){
+function word(label, selectedColor){
 function wordCloud(selector) {
-
+    console.log(selectedColor);
     var fill = d3.scaleOrdinal(d3.schemeCategory10);
 
     var svg = d3.select(selector).append("svg")
@@ -55,8 +55,6 @@ function wordCloud(selector) {
 
 }
 
-var word = Selected;
-console.log(word);
 var flag = 0;
 var list_values = [];
 var words = "";
@@ -64,7 +62,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             if (error) throw error;
             data.forEach(function(f){
 
-                if(f.Key == word){
+                if(f.Key == label){
                     flag = 1;
                     words += f.Values;
                 }
@@ -75,7 +73,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             });
             if(flag == 0){
                 list_values.forEach(function(d){
-                    if(d.indexOf(word) >= 0){
+                    if(d.indexOf(label) >= 0){
                         d = d.slice(1,d.length - 1);
                         words += d;
 

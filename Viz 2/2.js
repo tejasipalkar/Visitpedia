@@ -2,7 +2,8 @@ function initiialize_viz2(Selected){
         $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e.target.__data__.val);
 			var label = e.target.__data__.val;
-			word(label);
+			var color = e.target.attributes.style.textContent.substring(6,22);
+			word(label, color);
 			$('#v3').css("display", "block");
 	        $('html, body').animate({
 	            scrollTop: $("#v3").offset().top
