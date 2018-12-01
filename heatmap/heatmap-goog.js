@@ -84,6 +84,16 @@ var MONTH_LABEL = [
     var dataFiltered = nest2.filter(function (d){ return d.key == '2016'});
     heatmap();
 
+    var yearval = "2016";
+
+    var number= svg.append("text")
+                .attr("x",90)
+                .attr("y",70)
+                .style("fill","green")
+                .style("text-anchor", "middle")
+                .attr("font-size",20)
+                .text(yearval);
+
     function heatmap(){
 
         var allButtons= svg.append("g")
@@ -94,6 +104,14 @@ var MONTH_LABEL = [
             var defaultColor = d3.rgb(119,119,187);
             var hoverColor= "#0000ff";
             var pressedColor= "#000077";
+
+            var number= svg.append("text")
+                .attr("x",90)
+                .attr("y",70)
+                .style("fill","green")
+                .style("text-anchor", "middle")
+                .attr("font-size",20)
+                .text(yearval);
 
             var buttonGroups= allButtons.selectAll("g.button")
                                     .data(labels)
@@ -113,10 +131,8 @@ var MONTH_LABEL = [
                                         }
                                         svg.selectAll("*").remove();
                                         dataFiltered = nest2.filter(function (d){ return d.key == i});
+                                        yearval = i;
                                         heatmap();
-                                        d3.select(this)
-                                            .select("rect")
-                                            .style("fill",pressedColor);
                                     })
                                     .on("mouseover", function() {
                                         if (d3.select(this).select("rect").attr("fill") != pressedColor) {
