@@ -34,7 +34,7 @@ var MONTH_LABEL = [
             document.getElementById('viz2b').innerHTML = "";
             document.getElementById('viz_2').innerHTML = "";
             $("#viz3svg").empty();
-            document.getElementById('area1').innerHTML = "";
+            $('#area1 svg').remove();
             $(".toggle").prop("onclick", null).off("click");
             $('#v3').css("display", "none");
             initiialize_viz2(Selected);

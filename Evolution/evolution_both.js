@@ -24,6 +24,8 @@ var x = 0,
     x3 = 0;
     y3 = 0;
 
+$('#area1 svg').remove();
+$('#area2 svg').remove();
 var svg = d3.select("#area1").append("svg")
     .attr("width", width)
     .attr("height", height);
