@@ -4,7 +4,7 @@ function initiialize_viz2(Selected){
 	document.getElementById('viz2b').innerHTML = "";
 	document.getElementById('viz2c').innerHTML = "";
 	document.getElementById('viz_2').innerHTML = "";
-	$('#viz2').find('h3').remove()
+	$('#viz2').find('.chart_heading').remove()
 	$("#viz_2").append("<h3>Google</h3>");
         $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e);
