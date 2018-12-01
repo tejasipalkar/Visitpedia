@@ -107,7 +107,7 @@ li {
 .active .toggle-label-on {
   color: #3498DB;
 }
-#viz2b{
+#viz2b, #viz2c{
 	display: none;
 	text-align: center;
 }
