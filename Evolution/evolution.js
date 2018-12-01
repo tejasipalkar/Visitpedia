@@ -25,9 +25,12 @@ var x = 0,
     x3 = 0;
     y3 = 0;
 
+console.log(SelectedColor);
+$('#area1').empty();
 var svg = d3.select("#area1").append("svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .attr("id", "viz3svg");
 
 svg.append("rect")
     .attr("width", width)
@@ -240,5 +243,6 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
             }
+
   });
 }

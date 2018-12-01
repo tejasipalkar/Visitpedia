@@ -1,13 +1,14 @@
 function initiialize_viz2(Selected){
         $(document).on('click touch', '.series-segment', function (e) {
-			console.log(e.target.__data__.val);
+			console.log(e);
 			var label = e.target.__data__.val;
-			var color = e.target.attributes.style.textContent.substring(6,22);
+			var color = e.target.attributes.style.textContent.split(';')[0];
+			color = color.substr(color.indexOf('r'), color.length-1)
 			word(label, color, ranks);
 			$('#v3').css("display", "block");
 	        $('html, body').animate({
 	            scrollTop: $("#v3").offset().top
-	        }, 1000);
+	        }, 10);
 		 });
         $(function(){
 		  $('.toggle').on('click', function(event){
