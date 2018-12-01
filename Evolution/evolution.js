@@ -174,7 +174,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             function getWords(words) {
                 return words
                     .map(function(d) {
-                        return {text: d, size: 20};
+                        return {text: d, size: 12};
                     })
             }
 
