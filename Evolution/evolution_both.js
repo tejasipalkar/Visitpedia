@@ -196,7 +196,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             function getWords(words) {
                 return words
                     .map(function(d) {
-                        return {text: d, size: 20};
+                        return {text: d, size: 12};
                     })
             }
 
@@ -226,9 +226,22 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             return result;
             }
 
+            function shuffle(a) {
+                var j, x, i;
+                for (i = a.length - 1; i > 0; i--) {
+                    j = Math.floor(Math.random() * (i + 1));
+                    x = a[i];
+                    a[i] = a[j];
+                    a[j] = x;
+                }
+                return a;
+            }
+
             var values = words.split(',');
-            console.log(values);
             if (values.length > 6){
+                var index = values.indexOf(label);
+                values.splice(index,1);
+                values.unshift(label);
                 var newvals = splitvals(values,3);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull2.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
@@ -243,8 +256,10 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 myWordCloud = wordCloud(svg,x3/1.4,y3/1.3,270,270);
                 myWordCloud.update(getWords(newvals[2]));
 
-
-
+                values = shuffle(values);
+                var index = values.indexOf(label);
+                values.splice(index,1);
+                values.unshift(label);
                 hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull6.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull7.datum(d3.polygonHull(vertices3)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });

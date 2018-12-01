@@ -203,10 +203,11 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
             return result;
             }
-            console.log(words);
             var values = words.split(',');
-            console.log(values);
             if (values.length > 6){
+                var index = values.indexOf(label);
+                values.splice(index,1);
+                values.unshift(label);
                 var newvals = splitvals(values,3);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull2.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
@@ -214,9 +215,6 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 hull4.datum(d3.polygonHull(vertices4)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x1/1.7,y1/1.7,270,270);
                 myWordCloud.update(getWords(newvals[0]));
-                console.log(newvals[0]);
-                console.log(newvals[1]);
-                console.log(newvals[2]);
 
                 myWordCloud = wordCloud(svg,x2/1.3,y2/1.7,270,270);
                 myWordCloud.update(getWords(newvals[1]));
@@ -230,6 +228,8 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 randomY = d3.randomUniform(height/1.2, 60),
                 vertices = d3.range(100).map(function() { return [randomX(), randomY()]; });
 
+                hull.style("fill", SelectedColor)
+                .style("fill-opacity",1);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
@@ -238,7 +238,8 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                     randomX = d3.randomUniform(width/1.2, 60),
                     randomY = d3.randomUniform(height/1.2, 60),
                     vertices = d3.range(100).map(function() { return [randomX(), randomY()]; });
-
+                hull.style("fill", SelectedColor)
+                .style("fill-opacity",1);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
