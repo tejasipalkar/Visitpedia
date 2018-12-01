@@ -203,10 +203,11 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
             return result;
             }
-            console.log(words);
             var values = words.split(',');
-            console.log(values);
             if (values.length > 6){
+                var index = values.indexOf(label);
+                values.splice(index,1);
+                values.unshift(label);
                 var newvals = splitvals(values,3);
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 hull2.datum(d3.polygonHull(vertices2)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
