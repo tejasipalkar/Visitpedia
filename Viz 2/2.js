@@ -27,6 +27,7 @@ function initiialize_viz2(Selected){
 		$( document ).ready(function() {
 		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year+"&dataset="+Selected.dataset;
 	        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index.html'+string+'" width="80%" height="520"></object>';
+	        $(".legendG").empty();
 		});
 		var SelectedData = [];
 		var counts = {};
@@ -104,6 +105,8 @@ function initiialize_viz2(Selected){
 				.data(data)
 				.maxLineHeight(20)
 				.zQualitative(true)
+				.width(1024)
 				(document.getElementById('viz_2'));
 		});
+		$(".legendG").empty();
 }

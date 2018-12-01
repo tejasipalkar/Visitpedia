@@ -107,6 +107,7 @@ function initiialize_viz2(Selected){
 			TimelinesChart()
 				.data(data)
 				.maxLineHeight(20)
+				.width(1024)
 				.zQualitative(true)
 				(document.getElementById('viz_2'));
 		});
@@ -183,6 +184,7 @@ function initiialize_viz2(Selected){
 				.data(data)
 				.maxLineHeight(20)
 				.zQualitative(true)
+				.width(1024)
 				(document.getElementById('viz_2'));
 		});
 }
