@@ -25,7 +25,7 @@ function initiialize_viz2(Selected){
 		  });
 		});
 		$( document ).ready(function() {
-		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year;
+		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year+"&dataset="+Selected.dataset;
 	        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index.html'+string+'" width="80%" height="520"></object>';
 		});
 		var SelectedData = [];
