@@ -196,7 +196,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             function getWords(words) {
                 return words
                     .map(function(d) {
-                        return {text: d, size: 20};
+                        return {text: d, size: 12};
                     })
             }
 
@@ -238,7 +238,6 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
             }
 
             var values = words.split(',');
-            console.log(values);
             if (values.length > 6){
                 var index = values.indexOf(label);
                 values.splice(index,1);

@@ -84,28 +84,17 @@ var MONTH_LABEL = [
     var dataFiltered = nest2.filter(function (d){ return d.key == '2016'});
     heatmap();
 
+    var yearval = "2016";
+
+    var number= svg.append("text")
+                .attr("x",90)
+                .attr("y",70)
+                .style("fill","green")
+                .style("text-anchor", "middle")
+                .attr("font-size",20)
+                .text(yearval);
+
     function heatmap(){
-
-        // var datavals = [2016,2017,2018];
-        // var slider = d3.sliderVertical()
-        // .min(2016)
-        // .max(2018)
-        // .ticks(2)
-        // .tickFormat(d3.format(''))
-        // .height(400)
-        // .marks(datavals)
-        // .default(dataFiltered[0].key)
-        // .on('onchange', val => {
-        //     svg.selectAll("*").remove();
-        //     dataFiltered = nest2.filter(function (d){ return d.key == val});
-        //     heatmap();
-        // });
-
-        // var group = svg.append("g")
-        // .attr("class", "slider")
-        // .attr("transform", "translate(" + 60 + "," + 30 + ")");
-
-        // group.call(slider);
 
         var allButtons= svg.append("g")
                 .attr("id","allButtons")
@@ -115,6 +104,14 @@ var MONTH_LABEL = [
             var defaultColor = d3.rgb(119,119,187);
             var hoverColor= "#0000ff";
             var pressedColor= "#000077";
+
+            var number= svg.append("text")
+                .attr("x",90)
+                .attr("y",70)
+                .style("fill","green")
+                .style("text-anchor", "middle")
+                .attr("font-size",20)
+                .text(yearval);
 
             var buttonGroups= allButtons.selectAll("g.button")
                                     .data(labels)
@@ -134,10 +131,8 @@ var MONTH_LABEL = [
                                         }
                                         svg.selectAll("*").remove();
                                         dataFiltered = nest2.filter(function (d){ return d.key == i});
+                                        yearval = i;
                                         heatmap();
-                                        d3.select(this)
-                                            .select("rect")
-                                            .style("fill",pressedColor);
                                     })
                                     .on("mouseover", function() {
                                         if (d3.select(this).select("rect").attr("fill") != pressedColor) {
