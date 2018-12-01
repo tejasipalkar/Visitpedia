@@ -200,6 +200,7 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
 
             return result;
             }
+            console.log(words);
             var values = words.split(',');
             console.log(values);
             if (values.length > 6){
@@ -210,6 +211,9 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 hull4.datum(d3.polygonHull(vertices4)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x1/1.7,y1/1.7,270,270);
                 myWordCloud.update(getWords(newvals[0]));
+                console.log(newvals[0]);
+                console.log(newvals[1]);
+                console.log(newvals[2]);
 
                 myWordCloud = wordCloud(svg,x2/1.3,y2/1.7,270,270);
                 myWordCloud.update(getWords(newvals[1]));
