@@ -1,6 +1,11 @@
 function initiialize_viz2(Selected){
 	var top101 = [];
 	var top102 = [];
+	document.getElementById('viz2b').innerHTML = "";
+	document.getElementById('viz2c').innerHTML = "";
+	document.getElementById('viz_2').innerHTML = "";
+	$('#viz2').find('h3').remove()
+	$("#viz_2").append("<h3>Google</h3>");
         $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e);
 			var label = e.target.__data__.val;
@@ -23,21 +28,28 @@ function initiialize_viz2(Selected){
 		    $(this).toggleClass('active');
 		    if($('.toggle').hasClass('active')){
 		    	$('#viz2').hide();
+		    	$('#v3').css("margin-top", "40%");
 		    	$('#viz2b').show();
 		    	$('#viz2c').show();
+		    	$('.chart_heading').show();
 		    }
 		    else{
 		    	$('#viz2').show();
 		    	$('#viz2b').hide();
 		    	$('#viz2c').hide();
+		    	$('#v3').css("margin-top", "25%");
+		    	$('.chart_heading').hide();
 		    }
 		  });
 		});
 		$( document ).ready(function() {
 		    var string = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year+"&dataset=RankWikiData.csv";
 		    var string2 = "?startDay="+Selected.startDay+"&endDay="+Selected.endDay+"&startMonth="+Selected.startMonth+"&endMonth="+Selected.endMonth+"&year="+Selected.year+"&dataset=RankGoogleData.csv";
+	        // $("#viz2b").insertBefore("<h3>Wikipedia</h3>");
+	        // $("#viz2c").insertBefore("<h3>Google</h3>");
 	        document.getElementById('viz2b').innerHTML = '<object id="lineChartFrame" data="Line graph/index-both.html'+string+'" width="80%" height="520"></object>';
 	        document.getElementById('viz2c').innerHTML = '<object id="lineChartFrame" data="Line graph/index-both.html'+string2+'" width="80%" height="520"></object>';
+	        $('#viz_2').after("<h3>Wikipedia</h3>");
 		});
 		var SelectedData = [];
 		var counts = {};

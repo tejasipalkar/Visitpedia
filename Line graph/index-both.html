@@ -2,6 +2,7 @@
 <head>
 <meta charset="utf-8">
 <title>Issues Ratings</title>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
 <style>
 
 body {
@@ -114,7 +115,7 @@ var line = d3.svg.line()
     .defined(function(d) { return d.rating; });  // Hiding line value defaults of 0 for missing data
 
 var maxY; // Defined later to update yAxis
-
+//$("body").append("<h3>Google</h3>");
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom) //height + margin.top + margin.bottom

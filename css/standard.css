@@ -107,11 +107,15 @@ li {
 .active .toggle-label-on {
   color: #3498DB;
 }
-#viz2b, #viz2c{
+#viz2b, #viz2c, .chart_heading{
 	display: none;
 	text-align: center;
 }
 .inBoard {
 	font-family: Work Sans, sans-serif;
 	text-align: justify;
+}
+.chart_heading{
+	margin-bottom: 0px;
+	margin-top: 3%;
 }

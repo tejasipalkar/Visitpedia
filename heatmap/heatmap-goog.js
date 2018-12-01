@@ -32,7 +32,6 @@ var MONTH_LABEL = [
         if(!isEmpty(Selected)){
             Selected.dataset = dataset;
             document.getElementById('viz2b').innerHTML = "";
-            document.getElementById('viz_2').innerHTML = "";
             $("#viz3svg").empty();
             $('#area1 svg').remove();
             $(".toggle").prop("onclick", null).off("click");
