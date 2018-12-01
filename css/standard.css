@@ -1,0 +1,121 @@
+html {
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+body {
+	background-color: #FFFFFF;
+}
+.board {
+	width: 98%;
+	height: 100%;
+	margin-top: 5%;
+	margin-left: 1%;
+	padding-left: 1%;
+	margin-right: 1%;
+	padding-right: 1%;
+	padding-top: 1%;
+	background-color: #FEFEFE;
+	box-shadow: 0px 0px 10px #000000;
+	text-align: justify;
+}
+h1 {
+	font-family: Work Sans, sans-serif;
+	text-align: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+h2 {
+	font-family: Work Sans, sans-serif;
+	margin-bottom: 0px;
+}
+p, li {
+	font-family: Work Sans, sans-serif;
+	font-size: 1.2em;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333333;
+}
+
+li {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 19px 16px;
+	text-decoration: none;
+	font-size:2em;
+	font-family: Work Sans, sans-serif;
+}
+#v2, #v3, #v4 {
+	display: none;
+	height: 100vh;
+}
+#viz1, #viz2, #viz3, #viz4 {
+	margin-top: 5%;
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	align-self: center;
+}
+.toggle-container{
+	margin: 0% 5%;
+	text-align: center;
+}
+.toggle{
+	width: 30%;
+	margin: auto;
+}
+.toggle-switch {
+  background: #ccc;
+  width: 80px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+.toggle-switch:after {
+  content: " ";
+  display: block;
+  width: 40px;
+  height: 30px;
+  background-color: #3498DB;
+  border: 3px solid #fff;
+  border-top: 0;
+  border-bottom: 0;
+  margin-left: -3px;
+  transition: all 0.1s ease-in-out;
+}
+.active .toggle-switch:after {
+  margin-left: 40px;
+}
+.toggle-label {
+  display: inline-block;
+  line-height: 30px;
+}
+.toggle-label-off {
+  color: #3498DB;
+}
+.active .toggle-label-off {
+  color: #000;
+}
+.active .toggle-label-on {
+  color: #3498DB;
+}
+#viz2b, #viz2c, .chart_heading{
+	display: none;
+	text-align: center;
+}
+.inBoard {
+	font-family: Work Sans, sans-serif;
+	text-align: justify;
+}
+.chart_heading{
+	margin-bottom: 0px;
+	margin-top: 3%;
+}

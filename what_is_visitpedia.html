@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>What is VisitPedia?</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="css/standard.css" />
+	
+	<link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet'>
+</head>
+
+<body>
+
+	<header id="header" class="hide">
+		<div class="inner">
+			<div class="content">
+				<h1>VisitPedia</h1>
+				<h2>A visualization tool for analyzing<br>trends on internet.</h2>
+				<a href="index.html" class="button big alt"><span>Home</span></a>
+			</div>
+				<a href="index.html" class="button hidden"><span>Home</span></a>
+		</div>
+	</header>
+
+	<ul class="nav-bar">
+		<li style="float:left; margin-left:20%;">VisitPedia</li>
+		<li style="float:right; margin-right:20%;">Keeps you trending</li>
+	</ul>
+
+	<div class="board">
+		<h1 style="font-size:1.5em;">What is VisitPedia?</h1>
+		<h2>Introduction</h2>
+		<p>Visitpedia is a tool that helps to identify the trending events on Google and Wikipedia from the visit counts of the keywords. These keywords when clustered together gives a bigger picture of the trending events on these websites. The evolution pattern of these events is concerned with changes in the content of the event over time and understanding how are these related. The Visitpedia tool works in following steps:<br>
+		a)<u>Data Pre-Processing:</u> This is concerned with the structuring of data for visualization    and analysis. The dataset here comprises of the visit counts indicating the number of visits of various events on Wikipedia per month. Those entries with very small event counts are discarded and the ones with higher values are kept.<br>
+		b)<u>Entry Event Analysis:</u> After the data is prepared, analysis of the events is performed using an event detection algorithm. The visit count of the entries is visualized using charts that displays the sum of visit count of the events.<br>
+		c)<u>Critical Event extraction:</u> The  results extracted from the event analysis helps in categorising events as sudden(duration aware) or continuous events.<br>
+		d)<u>Event Analysis :</u>The tool solves this  time clustering problem to find events similar to the critical event that was extracted in the previous step. The results are split into subsets and these subsets might be merged in different combination to understand the underlying patterns that exist between the subsets.<br>
+		e)<u>Visualization and Interaction: </u>The last step involves communicating the results of our analysis using some visualisation and interaction technique. The Event overview calendar, Critical Event River , Evolution graph and Text view and line graph are the visualisation techniques that can be used to represent the results of the different steps in the process.<br>
+ 		</p>
+ 		<h2>Proposed Extension:</h2>
+ 		<p>With this project, we have tried to create a tool that effectively evaluates the current events on Google and Wikipedia for a particular time frame based on the selection of the user. A comparision is drawn via different visualization for different attributes.
+ 		Other part to our extension is the evolution graph which shows clusters of relevant events in regards of similarity index.The most significant part of this extension is the comparison between evolution graphs, observing the clusters for the same selected event will give us a picture which related events are closely bound to the selected word, if they are same or they differ as per the log of their search. To summarize, our extension provides a comparison of two most widely used search engines and draws a trending event out of it, and provides relation to other events in the same time range, clustering them with similarity index, 
+ 		</p>
+	</div>
+
+</body>
+</html>

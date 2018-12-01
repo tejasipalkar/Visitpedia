@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<title>Visitpedia: Both Datasets</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!--	CSS	Libraries -->
+	<link href='https://fonts.googleapis.com/css?family=Indie Flower' rel='stylesheet' />
+	<!--	CSS	Custom -->
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="css/standard.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<link rel = "stylesheet" href = "heatmap/heatmap.css"></link>
+	<link rel = "stylesheet" href = "Evolution/evolution.css"></link>
+	<!--	JS	Libraries -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://unpkg.com/d3-simple-slider/build/d3-simple-slider.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+	<script src="https://www.unpkg.com/timelines-chart@2.6.4/dist/timelines-chart.min.js"></script>
+	<script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+	<!--	JS	Custom -->
+	<script src="js/showDiv.js"></script>
+    <script src = "heatmap/heatmap-goog.js"></script>
+    <script src = "Viz 2/2-both.js" type="text/javascript"></script>
+    <script src = "Evolution/evolution_both.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<header id="header" class="hide">
+		<div class="inner">
+			<div class="content">
+				<h1>VisitPedia</h1>
+				<h2>A visualization tool for analyzing<br>trends on internet.</h2>
+				<a href="index.html" class="button big alt"><span>Home</span></a>
+			</div>
+			<a href="index.html" class="button hidden"><span>Home</span></a>
+		</div>
+	</header>
+
+	<ul class="nav-bar">
+		<li style="float:left; margin-left:20%;">VisitPedia</li>
+		<li style="float:right; margin-right:20%;">Keeps you trending</li>
+	</ul>
+
+	<div id="v1">
+		<div id="viz1">
+			<div>
+				<h3>Heatmap Calender View</h3>
+				<p>This visualization shows the cumulative sum of the visit counts through a specific year. The year can be changed using the toggle buttons and to have a more indepth view, the brush can be used to select a specific time range and move to the next visualization</p>
+			</div>
+			<div id ="heatmap">
+			</div>
+			<div class="next_button"><button id="next_butt"">Select -></button></div>
+		</div>
+	</div>
+
+
+
+
+	<div id="v2">
+		<hr style="height:1px; border:none; color:#000000; background-color:#000000; width:95%; margin-left:auto; margin-right:auto;" />
+
+		<div id="viz2">
+			<div>
+				<h3>Critical Event River and Multi Line Chart</h3>
+				<p>The Critical Event River renders top 10 events for the selected time frame. Multi line chart displays line diagram where the height is proportional to the rank of the corresponding event. Use the Toggle button at the bottom to switch the views.</p>
+			</div>
+			<div id="viz_2"></div>
+		</div>
+		<h3 class="chart_heading">Google</h3>
+		<div id="viz2b">
+			<div>
+				<h3>Viz 2</h3>
+				<p>Brief explanation</p>
+			</div>
+			<div id="viz_2b">
+			</div>
+		</div>
+		<h3 class="chart_heading">Wikipedia</h3>
+		<div id="viz2c">
+			<div>
+				<h3>Viz 2</h3>
+				<p>Brief explanation</p>
+			</div>
+			<div id="viz_2b">
+			</div>
+		</div>
+		<div class="toggle-container">
+			<div class="toggle">
+			  <div class="toggle-label toggle-label-off">Event River</div>
+			  <div class="toggle-switch"></div>
+			  <div class="toggle-label toggle-label-on">Line Graph</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="v3" style="margin-top: 25%;">
+		<hr style="height:1px; border:none; color:#000000; background-color:#000000; width:95%; margin-left:auto; margin-right:auto;" />
+
+		<div id="viz3">
+			<div>
+				<h3>Evolution Graph</h3>
+				<p>This graph shows the evolution of the related events in 3 parts, first part shows the most related events to the selected word based on their visit counts, the second part shows the medium level related events to the selected word and the third part shows the least related events. If there arent many related events, then only one large graph is shown. </p>
+			</div>
+			<div id = "area1" style = "float:left; width:50% ; border:1px solid black">
+    			<h1 style = "text-align: center;"> Wikipedia </h1>
+			</div>
+			<div id = "area2" style = "float:right; width:50%; border:1px solid black">
+    			<h1 style = "text-align: center;"> Google </h1>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+    	$( "#next_butt" ).click(function() {
+		  	updateData("RankWikiData.csv");
+		});
+	});
+</script>
+</body>
+</html>

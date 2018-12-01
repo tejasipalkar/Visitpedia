@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>VisitPedia</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+
+    <style>
+    *{
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h2{
+  font-family: 'Montserrat';
+  font-weight: normal;
+  color: #444;
+  text-align: center;
+  margin: 1.6rem 0;
+}
+
+.wrapper{
+  width: 90%;
+  margin: 0 auto;
+  max-width: 80rem;
+}
+
+.cols{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.col{
+  width: calc(25% - 2rem);
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.container{
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+.front,
+.back{
+  background-size: cover;
+  background-position: center;
+  -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  text-align: center;
+  min-height: 280px;
+  height: auto;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.back{
+  background: #000000;
+  background: -webkit-linear-gradient(45deg,  #333333 0%, #777777 100%);
+}
+
+.front:after{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  content: '';
+  display: block;
+  opacity: 0.65;
+  background-color: #000000;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+.container:hover .front,
+.container:hover .back{
+  -webkit-transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  -o-transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1), -webkit-transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.back{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+}
+
+.inner{
+  -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+  transform: translateY(-50%) translateZ(60px) scale(0.94);
+  top: 50%;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 1px solid transparent;
+  -webkit-perspective: inherit;
+  perspective: inherit;
+  z-index: 2;
+}
+
+.container .back{
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.container .front{
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.container:hover .back{
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  visibility: visible;
+}
+
+.container:hover .front{
+  -webkit-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.front .inner p{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.front .inner p:after{
+  content: '';
+  width: 4rem;
+  height: 2px;
+  position: absolute;
+  background: #C6D4DF;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -.75rem;
+}
+
+.front .inner span{
+  color: rgba(255,255,255,0.7);
+  font-family: 'Montserrat';
+  font-weight: 300;
+}
+
+@media screen and (max-width: 64rem){
+  .col{
+    width: calc(33.333333% - 2rem);
+  }
+}
+
+@media screen and (max-width: 48rem){
+  .col{
+    width: calc(50% - 2rem);
+  }
+}
+
+@media screen and (max-width: 32rem){
+  .col{
+    width: 100%;
+    margin: 0 0 2rem 0;
+  }
+}
+
+body {
+  background-color: #E0E0E0;
+}
+
+a {
+  text-decoration: None;
+  color: #FFFFFF;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 19px 16px;
+  text-decoration: none;
+}
+    </style>
+
+</head>
+<body>
+
+<header id="header">
+	<div class="inner">
+		<div class="content">
+			<h1>VisitPedia</h1>
+			<h2>A visualization tool for analyzing<br>trends on internet.</h2>
+			<a href="index.html" class="button big alt"><span>Home</span></a>
+		</div>
+		<a href="index.html" class="button hidden"><span>Home</span></a>
+	</div>
+</header>
+
+
+<ul class="nav-bar">
+    <li style="float:left; margin-left:20%; font-size:2em">VisitPedia</li>
+    <li style="float:right; margin-right:20%; font-size:2em">Keeps you trending</li>
+  </ul>
+
+	<div class="wrapper">
+		<div class="cols">
+
+			<div class="col" ontouchstart="this.classList.toggle('hover');">
+				<div class="container">
+					<div class="front" style="background-image: url('images/p21.jpg')">
+						<div class="inner">
+							<p>What is VisitPedia?</p>
+							<span>Introduction</span>
+						</div>
+					</div>
+					<a href="what_is_visitpedia.html">
+						<div class="back">
+							<div class="inner">
+								<p>A Brief Introduction</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/GoogleLogo.png')">
+                        <div class="inner">
+                            <p>Google</p>
+							               <span>Visualize</span>
+                        </div>
+                    </div>
+                    <a href="visualization_google.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Find out what is trending based on Google Dataset</p>
+	                        </div>
+	                    </div>
+	                </a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/WikipediaLogo.png')">
+                        <div class="inner">
+                            <p>Wikipedia</p>
+							<span>Visualize</span>
+                        </div>
+                    </div>
+                    <a href="visualization_wiki.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                        	<p>Find out what is trending based on Wikipedia Dataset</p>
+	                        </div>
+                    	</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/p10.jpg')">
+                        <div class="inner">
+                            <p>Walkthrough</p>
+              				<span>How it works?</span>
+                        </div>
+                    </div>
+                    <a href="how_visitpedia_works.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Interested in knowing the working of VisitPedia? Click here!</p>
+	                        </div>
+	                    </div>
+                	</a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/p14.jpg')">
+                        <div class="inner">
+                            <p>Read Me</p>
+             				<span>Setup Instructions</span>
+                        </div>
+                    </div>
+                    <a href="readme.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Find out how you can run VisitPedia on your system</p>
+	                        </div>
+	                    </div>
+	                </a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/both.jpg')">
+                        <div class="inner">
+                            <p>G vs W</p>
+              				<span>Visualize Both</span>
+                        </div>
+                    </div>
+                    <a href="visualization_both.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Visualize both the datasets to find out the "real" trends</p>
+	                        </div>
+                    	</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/p17.jpg')">
+                        <div class="inner">
+                            <p>About Us</p>
+              				<span>Find out about the team</span>
+                        </div>
+                    </div>
+                    <a href="aboutus.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Get to know us better</p>
+	                        </div>
+	                    </div>
+	                </a>
+                </div>
+            </div>
+
+            <div class="col" ontouchstart="this.classList.toggle('hover');">
+                <div class="container">
+                    <div class="front" style="background-image: url('images/biblio.jpg')">
+                        <div class="inner">
+                            <p>Bibliography</p>
+              				<span>Sources</span>
+                        </div>
+                    </div>
+                    <a href="bibliography.html">
+	                    <div class="back">
+	                        <div class="inner">
+	                            <p>Find out about our sources</p>
+	                        </div>
+	                    </div>
+	                </a>
+                </div>
+            </div>
+        </div>
+ </div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+</html>
