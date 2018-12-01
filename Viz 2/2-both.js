@@ -1,14 +1,21 @@
 function initiialize_viz2(Selected){
+	var top101 = [];
+	var top102 = [];
         $(document).on('click touch', '.series-segment', function (e) {
 			console.log(e);
 			var label = e.target.__data__.val;
-			var color = e.target.attributes.style.textContent.split(';')[0];
-			color = color.substr(color.indexOf('r'), color.length-1)
-			word(label, color, ranks1, ranks2);
-			$('#v3').css("display", "block");
-	        $('html, body').animate({
-	            scrollTop: $("#v3").offset().top
-	        }, 10);
+			if(top101.includes(label) && top102.includes(label)){
+				var color = e.target.attributes.style.textContent.split(';')[0];
+				color = color.substr(color.indexOf('r'), color.length-1)
+				word(label, color, ranks1, ranks2);
+				$('#v3').css("display", "block");
+		        $('html, body').animate({
+		            scrollTop: $("#v3").offset().top
+		        }, 10);
+			}
+			else{
+				alert("Please select event common to both datasets");
+			}
 		 });
         $(function(){
 		  $('.toggle').on('click', function(event){
@@ -67,6 +74,7 @@ function initiialize_viz2(Selected){
 			});
 			console.log(sortable);
 			var topTen = sortable.slice(0, 10);
+			topTen.forEach(function(el){top101.push(el[0])})
 			function pushSinglePoint(point){
 				var timeRange = [];
 				var day = parseInt(point[2], 10),
@@ -142,7 +150,8 @@ function initiialize_viz2(Selected){
 			    return b[1] - a[1];
 			});
 			console.log(sortable);
-			var topTen = sortable.slice(0, 10);
+			var topTen2 = sortable.slice(0, 10);
+			topTen2.forEach(function(el){top102.push(el[0])})
 			function pushSinglePoint(point){
 				var timeRange = [];
 				var day = parseInt(point[2], 10),
@@ -158,7 +167,7 @@ function initiialize_viz2(Selected){
 				return obj;
 			}
 			var eventList = [];
-			Array.prototype.forEach.call(topTen, child => {
+			Array.prototype.forEach.call(topTen2, child => {
 				var obj = {};
 				obj.label = child[0];
 				obj.data = new Array();
