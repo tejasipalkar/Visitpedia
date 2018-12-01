@@ -279,9 +279,15 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                 randomY = d3.randomUniform(height/1.2, 60),
                 vertices = d3.range(100).map(function() { return [randomX(), randomY()]; });
 
+                hull.style("fill", SelectedColor)
+                .style("fill-opacity",1);
+
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
+
+                hull5.style("fill", SelectedColor)
+                .style("fill-opacity",1);
 
                 hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg2,x/2,y/2,width/1.4,height/1.4);
@@ -292,9 +298,15 @@ d3.csv("data/final_clustered_data.csv", function(error, data){
                     randomY = d3.randomUniform(height/1.2, 60),
                     vertices = d3.range(100).map(function() { return [randomX(), randomY()]; });
 
+                hull.style("fill", SelectedColor)
+                .style("fill-opacity",1);
+
                 hull.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg,x/2,y/2,width/1.4,height/1.4);
                 myWordCloud.update(getWords(values));
+
+                hull5.style("fill", SelectedColor)
+                .style("fill-opacity",1);
 
                 hull5.datum(d3.polygonHull(vertices)).attr("d", function(d) { return "M" + d.join("L") + "Z"; });
                 var myWordCloud = wordCloud(svg2,x/2,y/2,width/1.4,height/1.4);
