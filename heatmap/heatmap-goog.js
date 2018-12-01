@@ -86,27 +86,6 @@ var MONTH_LABEL = [
 
     function heatmap(){
 
-        // var datavals = [2016,2017,2018];
-        // var slider = d3.sliderVertical()
-        // .min(2016)
-        // .max(2018)
-        // .ticks(2)
-        // .tickFormat(d3.format(''))
-        // .height(400)
-        // .marks(datavals)
-        // .default(dataFiltered[0].key)
-        // .on('onchange', val => {
-        //     svg.selectAll("*").remove();
-        //     dataFiltered = nest2.filter(function (d){ return d.key == val});
-        //     heatmap();
-        // });
-
-        // var group = svg.append("g")
-        // .attr("class", "slider")
-        // .attr("transform", "translate(" + 60 + "," + 30 + ")");
-
-        // group.call(slider);
-
         var allButtons= svg.append("g")
                 .attr("id","allButtons")
 
